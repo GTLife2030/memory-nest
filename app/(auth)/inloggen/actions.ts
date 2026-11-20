@@ -10,7 +10,7 @@ import { rateLimit } from "@/lib/server/rate-limit";
 import { createClient } from "@/lib/supabase/server";
 
 export type SignInState = {
-  error: "invalidEmail" | "rateLimited" | "generic" | null;
+  error: "invalidEmail" | "rateLimited" | "mailLimit" | "generic" | null;
   email: string;
 };
 
@@ -47,6 +47,9 @@ export async function requestMagicLink(
   });
   if (error) {
     logger.warn("auth.magic_link_failed", { status: error.status, code: error.code });
+    // The mail provider counts all addresses together, so this is not the visitor's doing and
+    // waiting fifteen minutes would not help: say so.
+    if (error.code === "over_email_send_rate_limit") return { error: "mailLimit", email };
     return { error: error.status === 429 ? "rateLimited" : "generic", email };
   }
 
