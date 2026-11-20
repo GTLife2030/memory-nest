@@ -96,6 +96,6 @@ Screenshots: [docs/screenshots/phase-0](../screenshots/phase-0).
 
 ## Next steps
 
-1. Founder: fix push access; allow Supabase in the network settings and add keys; decide the region; decide hosting.
+1. Founder: fix push access; allow Supabase in the network settings and add keys; decide hosting (region is decided: Ireland).
 2. Then: push, first CI run, `supabase db push`, run `auth.spec.ts` and the RLS suite against the project. Phase 0 is only fully accepted after that.
 3. Phase 1 plan (onboarding, questions engine, capture, nest views, e-mail reminders), including the login confirmation step and a proposal for per-family media encryption.

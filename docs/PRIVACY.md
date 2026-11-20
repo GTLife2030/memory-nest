@@ -43,10 +43,10 @@ calls and WhatsApp.
 | Postmark                     | e-mail                      | to verify (US company)              | to sign | n/a                          | phase 1         |
 | Meta (WhatsApp)              | reminders                   | to verify                           | to sign | n/a                          | phase 4         |
 
-**Region note.** The build prompt asks for Frankfurt (eu-central-1). The project that was created
-is in Ireland (eu-west-1). Both are in the EU, so data residency holds, but a Supabase project
-cannot be moved between regions. If Frankfurt matters (for example for a partner contract),
-recreate the project now while it is empty.
+**Region.** The build prompt asked for Frankfurt (eu-central-1); the project is in Ireland
+(eu-west-1). The founder decided on 2026-11-20 that Ireland is fine: both are in the EU, so data
+residency holds. A Supabase project cannot be moved between regions, so this is final for this
+project. The web host and worker should run in or near the same region (Dublin) to keep latency low.
 
 ## Open before launch
 

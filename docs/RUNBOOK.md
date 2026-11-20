@@ -13,7 +13,7 @@ read-only demo nest.
 
 ## Supabase project
 
-1. Region: EU. (Current project: eu-west-1; see PRIVACY.md for the Frankfurt note.)
+1. Region: EU. The project is in eu-west-1 (Ireland); decided, see PRIVACY.md.
 2. Apply the schema: `supabase link --project-ref <ref>` then `supabase db push`.
    Migrations are plain SQL in `supabase/migrations`; never change the database by hand.
 3. Auth → URL configuration: Site URL = production URL; add `<site>/auth/confirm` to the redirect list.
