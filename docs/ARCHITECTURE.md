@@ -63,13 +63,17 @@ All policy logic sits in `security definer` helpers in schema `app` (`has_role`,
 
 ## Sign-in
 
-1. `/inloggen` → server action → `signInWithOtp` (rate limited per IP and per address).
-2. The mail link lands on `/auth/confirm` (`token_hash` + `type`, or PKCE `code`).
-3. `/nest` finds the first membership or calls `create_family()` (security definer RPC; the only
-   way an end user gets a family) and redirects to `/nest/{familyId}`.
-4. `getNest()` loads the family under RLS; no row means 404, identical for "does not exist" and "not yours".
+Interim (ADR-010): e-mail address and password; accounts are created by the founder, no public
+sign-up. Magic links return when a mail sender is in place.
 
-Without Supabase configured, sign-in is off and only the read-only demo nest `/nest/demo` exists.
+1. `/inloggen` → server action → `signInWithPassword` (rate limited per address and per client;
+   one message for unknown address and wrong password).
+2. `/nest` finds the first membership or calls `create_family()` (security definer RPC; the only
+   way an end user gets a family) and redirects to `/nest/{familyId}`.
+3. `getNest()` loads the family under RLS; no row means 404, identical for "does not exist" and "not yours".
+
+Without Supabase configured, sign-in is off and only the read-only demo nest `/nest/demo` and
+the mock-up `/voorbeeld` exist. With Supabase, `/voorbeeld` is for signed-in visitors.
 
 ## Design system
 

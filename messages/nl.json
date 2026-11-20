@@ -64,31 +64,26 @@
   "auth": {
     "title": "Inloggen",
     "heading": "Welkom terug",
-    "lead": "Vul je e-mailadres in. Je krijgt een mail met een knop om in te loggen. Een wachtwoord heb je niet nodig.",
+    "lead": "Log in met je e-mailadres en het wachtwoord dat je van ons hebt gekregen.",
     "emailLabel": "E-mailadres",
     "emailHint": "Bijvoorbeeld naam@voorbeeld.nl",
-    "submit": "Stuur mij een inloglink",
-    "submitting": "Bezig met versturen…",
+    "submit": "Inloggen",
+    "submitting": "Bezig met inloggen…",
     "errors": {
       "invalidEmail": "Dit lijkt geen e-mailadres. Kijk je het even na?",
-      "rateLimited": "Je hebt net al een paar keer een link gevraagd. Probeer het over een kwartier opnieuw.",
-      "generic": "Het versturen lukte niet. Probeer het zo nog eens.",
-      "linkExpired": "Deze inloglink werkt niet meer. Vraag hieronder een nieuwe aan.",
-      "mailLimit": "Er zijn net te veel inlogmails verstuurd. Dat ligt niet aan jou. Probeer het over een uur opnieuw."
-    },
-    "sent": {
-      "title": "Kijk in je mail",
-      "heading": "Kijk in je mail",
-      "body": "We hebben een mail gestuurd naar {email}. Klik op de knop in die mail om in te loggen.",
-      "bodyNoEmail": "We hebben je een mail gestuurd. Klik op de knop in die mail om in te loggen.",
-      "spam": "Geen mail gezien? Kijk ook bij ongewenste mail. De link blijft een uur geldig.",
-      "again": "Ander e-mailadres gebruiken"
+      "missingPassword": "Vul ook je wachtwoord in.",
+      "wrongCredentials": "Dit e-mailadres en wachtwoord horen niet bij elkaar. Kijk je ze even na?",
+      "rateLimited": "Er is net een paar keer geprobeerd in te loggen. Probeer het over een kwartier opnieuw.",
+      "generic": "Het inloggen lukte niet. Probeer het zo nog eens.",
+      "linkExpired": "Deze inloglink werkt niet meer. Log hieronder in met je wachtwoord."
     },
     "notConfigured": {
       "heading": "Inloggen staat nog uit",
       "body": "Deze omgeving is nog niet met de database verbonden. Je kunt wel alvast rondkijken in het voorbeeldnest van familie De Wit.",
       "cta": "Bekijk het voorbeeldnest"
-    }
+    },
+    "passwordLabel": "Wachtwoord",
+    "forgot": "Wachtwoord kwijt of nog geen account? Stuur een bericht aan degene die je heeft uitgenodigd. Die helpt je verder."
   },
   "nest": {
     "title": "Het nest van {family}",

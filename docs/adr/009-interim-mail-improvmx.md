@@ -1,6 +1,6 @@
 # ADR-009: Sign-in mail through ImprovMX SMTP, for now
 
-**Status:** accepted · 2026-11-20 (founder decision) · interim
+**Status:** on hold · 2026-11-20 · superseded for now by ADR-010 (password sign-in); not set up
 
 **Context.** Supabase's built-in mail server sends about two messages per hour for the whole
 project. That blocked sign-in during the first tests and cannot serve test families.

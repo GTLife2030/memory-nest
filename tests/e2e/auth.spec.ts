@@ -1,11 +1,11 @@
 import { createClient } from "@supabase/supabase-js";
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 import { hasSupabase } from "./helpers";
 
 /**
- * Acceptance A1: sign in with a magic link and land in your own nest; another family's nest
- * stays closed. Runs only against a real Supabase project (CI, or locally with .env.local).
- * The link is generated through the admin API so no mailbox is needed.
+ * Acceptance A1 (adapted in ADR-010): sign in with e-mail address and password and land in your
+ * own nest; another family's nest stays closed. Runs only against a real Supabase project (CI
+ * secrets or .env.local). Test accounts are created through the admin API and removed afterwards.
  */
 const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 test.skip(
@@ -15,17 +15,19 @@ test.skip(
 test.describe.configure({ mode: "serial" });
 
 const stamp = Date.now();
+const password = `Nest-${stamp}-Truus!`;
 const emails = { truus: `e2e-truus-${stamp}@example.test`, eva: `e2e-eva-${stamp}@example.test` };
 const admin = () =>
   createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, serviceKey!, {
     auth: { persistSession: false },
   });
 
-async function magicLinkPath(email: string): Promise<string> {
-  const { data, error } = await admin().auth.admin.generateLink({ type: "magiclink", email });
-  if (error || !data.properties) throw new Error(`could not create link: ${error?.message}`);
-  return `/auth/confirm?token_hash=${data.properties.hashed_token}&type=magiclink&next=/nest`;
-}
+test.beforeAll(async () => {
+  for (const email of Object.values(emails)) {
+    const { error } = await admin().auth.admin.createUser({ email, password, email_confirm: true });
+    if (error) throw new Error(`could not create test user: ${error.message}`);
+  }
+});
 
 test.afterAll(async () => {
   const client = admin();
@@ -42,25 +44,36 @@ test.afterAll(async () => {
   }
 });
 
+async function signIn(page: Page, email: string, pass = password) {
+  await page.goto("/inloggen");
+  await page.getByLabel("E-mailadres").fill(email);
+  await page.getByLabel("Wachtwoord").fill(pass);
+  await page.getByRole("button", { name: "Inloggen", exact: true }).click();
+}
+
 let truusNest = "";
 
-test("requesting a link shows the check-your-mail screen", async ({ page }) => {
-  await page.goto("/inloggen");
-  await page.getByLabel("E-mailadres").fill(emails.truus);
-  await page.getByRole("button", { name: "Stuur mij een inloglink" }).click();
-  await expect(page.getByRole("heading", { name: "Kijk in je mail" })).toBeVisible();
-  await expect(page.getByText(emails.truus)).toBeVisible();
+test("a wrong password and an unknown address get the same kind message", async ({ page }) => {
+  await signIn(page, emails.truus, "niet-het-wachtwoord");
+  const alert = page.getByRole("alert").filter({ hasText: "horen niet bij elkaar" });
+  await expect(alert).toBeVisible();
+  await signIn(page, `bestaat-niet-${stamp}@example.test`);
+  await expect(alert).toBeVisible();
 });
 
-test("an invalid address gets a kind, specific message", async ({ page }) => {
-  await page.goto("/inloggen");
-  await page.getByLabel("E-mailadres").fill("truus-zonder-apenstaartje");
-  await page.getByRole("button", { name: "Stuur mij een inloglink" }).click();
-  await expect(page.getByRole("alert")).toContainText("Dit lijkt geen e-mailadres");
+test("an invalid address or empty password is explained", async ({ page }) => {
+  await signIn(page, "truus-zonder-apenstaartje");
+  await expect(
+    page.getByRole("alert").filter({ hasText: "Dit lijkt geen e-mailadres" }),
+  ).toBeVisible();
+  await signIn(page, emails.truus, "");
+  await expect(
+    page.getByRole("alert").filter({ hasText: "Vul ook je wachtwoord in" }),
+  ).toBeVisible();
 });
 
-test("the magic link signs in and opens a first, empty nest", async ({ page }) => {
-  await page.goto(await magicLinkPath(emails.truus));
+test("signing in opens a first, empty nest", async ({ page }) => {
+  await signIn(page, emails.truus);
   await expect(page).toHaveURL(/\/nest\/[0-9a-f-]{36}$/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Het nest van Ons nest");
   await expect(page.getByText("Jouw rol: Beheerder")).toBeVisible();
@@ -71,14 +84,20 @@ test("the magic link signs in and opens a first, empty nest", async ({ page }) =
   await expect(page, "a second visit reuses the same nest").toHaveURL(new RegExp(`${truusNest}$`));
 });
 
-test("a used or broken link asks for a new one", async ({ page }) => {
-  await page.goto("/auth/confirm?token_hash=not-a-real-token&type=magiclink");
-  await expect(page).toHaveURL(/\/inloggen\?fout=link$/);
-  await expect(page.getByRole("alert")).toContainText("Deze inloglink werkt niet meer");
+test("signed in, the mock-up is open and sign-in returns to where you were going", async ({
+  page,
+}) => {
+  await page.goto("/voorbeeld/onboarding");
+  await expect(page).toHaveURL(/\/inloggen\?next=/);
+  await page.getByLabel("E-mailadres").fill(emails.truus);
+  await page.getByLabel("Wachtwoord").fill(password);
+  await page.getByRole("button", { name: "Inloggen", exact: true }).click();
+  await expect(page).toHaveURL(/\/voorbeeld\/onboarding$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Voor wie is dit nest?");
 });
 
 test("someone from another family cannot open this nest", async ({ page }) => {
-  await page.goto(await magicLinkPath(emails.eva));
+  await signIn(page, emails.eva);
   await expect(page).toHaveURL(/\/nest\/[0-9a-f-]{36}$/);
   expect(new URL(page.url()).pathname).not.toBe(truusNest);
 
@@ -88,7 +107,8 @@ test("someone from another family cannot open this nest", async ({ page }) => {
 });
 
 test("signed out, the nest is closed again", async ({ page }) => {
-  await page.goto(await magicLinkPath(emails.truus));
+  await signIn(page, emails.truus);
+  await expect(page).toHaveURL(/\/nest\//);
   await page.getByRole("button", { name: "Uitloggen" }).click();
   await expect(page).toHaveURL(/\/$/);
   await page.goto(truusNest);

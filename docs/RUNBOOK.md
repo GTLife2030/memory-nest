@@ -26,7 +26,18 @@ read-only demo nest.
 7. Run the RLS suite against the project: `supabase test db --linked`.
 8. Before real families: Pro plan (daily backups, no pausing), custom SMTP, restore test.
 
-### Sign-in mail (SMTP)
+### Accounts and sign-in (interim, ADR-010)
+
+Sign-in is by e-mail address and password. There is no public sign-up.
+
+1. Authentication → Sign In / Providers: switch **Allow new users to sign up** off; under
+   Email, set the minimum password length to 12.
+2. New person: Authentication → Users → **Add user** → **Create new user**; fill in address and
+   password, leave **Auto Confirm User** on. Pass the password on by phone or in person.
+3. Forgotten password: open the user → set a new password.
+4. Removing someone: delete the user; their memberships go with it.
+
+### Sign-in mail (SMTP) — on hold
 
 The built-in mail server is for testing only (about two mails per hour). Sign-in mail goes through
 ImprovMX SMTP on our own domain (ADR-009, interim).

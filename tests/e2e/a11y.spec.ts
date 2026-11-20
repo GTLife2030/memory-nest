@@ -33,7 +33,6 @@ const mockup = [
 const routes = [
   { name: "landing", path: "/" },
   { name: "sign in", path: "/inloggen" },
-  { name: "link sent", path: "/inloggen/verstuurd?e=truus%40voorbeeld.nl" },
   { name: "design gallery", path: "/design" },
   { name: "offline", path: "/offline" },
   { name: "not found", path: "/deze-pagina-bestaat-niet" },

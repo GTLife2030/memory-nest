@@ -41,6 +41,16 @@ processor, a compromised staff account, and ordinary bugs.
 | T20 | Processor keeps or trains on content                          | —                                                                                                                  | DPAs and zero-retention in writing: before phase 2 goes live                 |
 | T21 | Company stops (the sector's real risk)                        | open formats in the data model                                                                                     | export, yearly automatic export, exit arrangement: phase 4                   |
 
+## Interim: password sign-in (ADR-010)
+
+| #   | Threat                                                                    | Control today                                                                                           | Open                                                                                                                              |
+| --- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| T22 | Password guessing or reuse of a leaked password                           | limit per address and per client, one message for unknown address and wrong password, no public sign-up | minimum length and leaked-password check are Supabase settings to switch on; the client limit still trusts `x-forwarded-for` (T9) |
+| T23 | Passwords handed over insecurely (chat, e-mail)                           | accounts are few and made by the founder                                                                | tell each tester the password by phone or in person; no self-service change yet                                                   |
+| T24 | Someone registers with another person's address to claim their invitation | sign-up is switched off                                                                                 | must stay off until e-mail confirmation works                                                                                     |
+
+T8b (login CSRF through a magic link) and T10 do not apply while no links are sent.
+
 ## Security review, phase 0
 
 An independent review with live probes against the test database found 14 verified issues, none
