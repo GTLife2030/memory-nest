@@ -41,6 +41,20 @@ processor, a compromised staff account, and ordinary bugs.
 | T20 | Processor keeps or trains on content                          | —                                                                                                                  | DPAs and zero-retention in writing: before phase 2 goes live                 |
 | T21 | Company stops (the sector's real risk)                        | open formats in the data model                                                                                     | export, yearly automatic export, exit arrangement: phase 4                   |
 
+## Security review, phase 0
+
+An independent review with live probes against the test database found 14 verified issues, none
+reachable by anonymous visitors: readers could see raw transcripts and earlier versions; capsule
+media could be adopted by another capsule; revoked members kept write access to their own
+content; released capsule media was not frozen; shares reached legacy contacts and non-members;
+references could cross families; owners could add people without consent; and smaller ones.
+All are closed in `20261120000600_hardening.sql` and reproduced in `supabase/tests/090_hardening.sql`,
+except login CSRF (T8b) and the trusted client IP (T9), which are open and listed above.
+
+Still to verify on hosted Supabase (the local shim cannot show these): the migration role has
+BYPASSRLS (the security-definer helpers depend on it); tables created outside migrations get
+Supabase's open default grants; Storage API behaviour (upsert, move, copy) under these policies.
+
 ## Not yet decided
 
 Per-family envelope encryption for media. It protects against a storage-level leak and a curious

@@ -107,6 +107,10 @@ describe("vault rule in the adapter layer", () => {
     const editStory = vi.fn<(...args: unknown[]) => Promise<object>>(async () => ({}));
     const guarded = instrument("llm", { editStory }, true, true);
     await expect(guarded.editStory({ segments: [] })).rejects.toThrow(/AiContext/);
+    await expect(guarded.editStory({ familyId: "f", vault: undefined })).rejects.toThrow(
+      /AiContext/,
+    );
+    await expect(guarded.editStory({ familyId: "f", vault: "false" })).rejects.toThrow(/AiContext/);
     expect(editStory).not.toHaveBeenCalled();
   });
 });

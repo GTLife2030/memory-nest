@@ -1,6 +1,6 @@
 # Phase 0 — Foundation & design system
 
-Status: **proposed, waiting for "go"** · 2026-11-20
+Status: **built; see [phase-0-report.md](phase-0-report.md)** · 2026-11-20
 
 ## 1. Goal and acceptance
 

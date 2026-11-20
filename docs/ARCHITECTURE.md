@@ -43,6 +43,11 @@ Rules that hold whatever the application does (triggers and constraints, `…000
 - A media row can only point at an object under `{family_id}/{uploader_id}/`; object access
   is derived from the media row.
 - `audit_log` is append-only for everyone.
+- Earlier versions and raw transcripts are for the author and the owner; readers get the approved story.
+- A revoked member loses all access, including to content they made. Their content stays in the family.
+- References (chapter, person, transcript, media, …) cannot point into another family.
+- A membership becomes active only when the invited person accepts (`accept_invitation`).
+- Only the author can take a story out of the vault; the owner can read it but not open it up.
 
 All policy logic sits in `security definer` helpers in schema `app` (`has_role`, `story_readable`,
 `media_readable`, …), so there is one definition of each rule. Schema `app` is not exposed by the API.
@@ -83,7 +88,7 @@ Every call is logged as one JSON line with `cost_cents`. AI adapters (`llm`, `st
 
 | Layer                                 | Tool             | Where                             |
 | ------------------------------------- | ---------------- | --------------------------------- |
-| RLS, triggers, structure              | pgTAP            | `supabase/tests` (175 assertions) |
+| RLS, triggers, structure              | pgTAP            | `supabase/tests` (218 assertions) |
 | Units, components, copy rules         | Vitest           | `tests/unit`                      |
 | Journeys, accessibility, headers, PWA | Playwright + axe | `tests/e2e`                       |
 | Accessibility score                   | Lighthouse       | `scripts/lighthouse.mjs`          |

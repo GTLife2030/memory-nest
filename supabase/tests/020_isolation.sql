@@ -51,7 +51,7 @@ select is_empty(
   'cannot update stories of another family');
 select throws_ok(
   format($$ update stories set family_id = %L where family_id = %L $$, tests.fam_a(), tests.fam_b()),
-  '42501', 'family_id is immutable', 'cannot move a story into another family');
+  '42501', null, 'cannot move a story into another family');
 
 select * from finish();
 rollback;

@@ -25,8 +25,8 @@ export async function proxy(request: NextRequest) {
   const wantsNest = pathname === "/nest" || pathname.startsWith("/nest/");
 
   if (!supabaseConfigured) {
-    // Without a database only the read-only demo nest exists.
-    if (wantsNest && pathname !== "/nest/demo") {
+    // Without a database only the read-only demo nest exists; /nest itself forwards to it.
+    if (wantsNest && pathname !== "/nest/demo" && pathname !== "/nest") {
       response = NextResponse.redirect(new URL("/inloggen", request.url));
     }
   } else {
@@ -61,12 +61,7 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    // Everything except static assets, the service worker and prefetches.
-    {
-      source:
-        "/((?!api/health|_next/static|_next/image|icons/|sw.js|favicon.ico|.*\\.(?:svg|png|jpg|webp|woff2)$).*)",
-      missing: [{ type: "header", key: "next-router-prefetch" }],
-    },
-  ],
+  // Everything except build assets and the service worker. No exclusion by file extension or by
+  // prefetch header: a request must not be able to opt out of the CSP by how it is shaped.
+  matcher: ["/((?!api/health|_next/static|_next/image|icons/|sw.js|favicon.ico).*)"],
 };

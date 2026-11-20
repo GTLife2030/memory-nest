@@ -95,6 +95,14 @@ test("security headers are set and scripts need a nonce", async ({ request }) =>
   expect(headers["strict-transport-security"]).toContain("max-age=");
   expect(headers["x-powered-by"]).toBeUndefined();
 
+  // The policy cannot be skipped by shaping the request like a prefetch or a static file.
+  const prefetch = await request.get("/design", { headers: { "next-router-prefetch": "1" } });
+  expect(prefetch.headers()["content-security-policy"]).toContain("script-src");
+  const fakeFile = await request.get("/nest/x.png");
+  expect(
+    fakeFile.headers()["content-security-policy"] ?? fakeFile.headers()["location"],
+  ).toBeTruthy();
+
   const second = await request.get("/");
   expect(second.headers()["content-security-policy"]).not.toBe(csp);
 });
@@ -105,7 +113,13 @@ test("no console errors or CSP violations on any screen", async ({ page }) => {
     if (message.type() === "error") problems.push(message.text());
   });
   page.on("pageerror", (error) => problems.push(error.message));
-  for (const path of ["/", "/inloggen", "/design", "/offline"]) {
+  for (const path of [
+    "/",
+    "/inloggen",
+    "/design",
+    "/offline",
+    ...(hasSupabase ? [] : ["/nest/demo"]),
+  ]) {
     await page.goto(path);
     await page.waitForLoadState("networkidle");
   }
@@ -158,6 +172,6 @@ test.describe("without a database", () => {
     await page.goto("/nest/3f0e7a52-1c7b-4a9e-9d0a-2f1f6d1c0a11");
     await expect(page).toHaveURL(/\/inloggen$/);
     await page.goto("/nest");
-    await expect(page).toHaveURL(/\/inloggen$/);
+    await expect(page).toHaveURL(/\/nest\/demo$/);
   });
 });

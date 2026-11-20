@@ -85,7 +85,10 @@ export function mockedAdapters(env: Env = serverEnv.get): AdapterName[] {
 }
 
 const isAiContext = (value: unknown): value is AiContext =>
-  typeof value === "object" && value !== null && "vault" in value && "familyId" in value;
+  typeof value === "object" &&
+  value !== null &&
+  typeof (value as AiContext).vault === "boolean" &&
+  typeof (value as AiContext).familyId === "string";
 
 /**
  * Wraps an adapter so that every call is logged with its cost and, for AI adapters, refused when

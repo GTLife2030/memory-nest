@@ -12,9 +12,18 @@ export type LogFields = {
 // Keys that must never reach the logs, whatever a caller passes in.
 const REDACTED = /(email|phone|token|secret|password|authorization|body|text|transcript|letter)/i;
 
+function redactValue(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(redactValue);
+  if (value && typeof value === "object") return redact(value as LogFields);
+  return value;
+}
+
 export function redact(fields: LogFields): LogFields {
   return Object.fromEntries(
-    Object.entries(fields).map(([key, value]) => [key, REDACTED.test(key) ? "[redacted]" : value]),
+    Object.entries(fields).map(([key, value]) => [
+      key,
+      REDACTED.test(key) ? "[redacted]" : redactValue(value),
+    ]),
   );
 }
 

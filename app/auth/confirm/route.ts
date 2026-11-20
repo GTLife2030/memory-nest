@@ -31,16 +31,19 @@ export async function GET(request: NextRequest) {
   const type = searchParams.get("type") as EmailOtpType | null;
   const code = searchParams.get("code");
 
-  let errorMessage: string | undefined;
+  // Only the provider's error code is logged: free-text messages can carry an e-mail address.
+  let failure: string | undefined;
   if (tokenHash && type && otpTypes.includes(type)) {
-    errorMessage = (await supabase.auth.verifyOtp({ token_hash: tokenHash, type })).error?.message;
+    const { error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type });
+    failure = error ? (error.code ?? "verify_failed") : undefined;
   } else if (code) {
-    errorMessage = (await supabase.auth.exchangeCodeForSession(code)).error?.message;
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    failure = error ? (error.code ?? "exchange_failed") : undefined;
   } else {
-    errorMessage = "missing token";
+    failure = "missing_parameters";
   }
-  if (errorMessage) {
-    logger.warn("auth.confirm_failed", { reason: errorMessage });
+  if (failure) {
+    logger.warn("auth.confirm_failed", { reason: failure });
     return NextResponse.redirect(failed);
   }
 

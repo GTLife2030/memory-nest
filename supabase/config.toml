@@ -1,0 +1,10 @@
+# Supabase CLI configuration. Only `public` is exposed through the API: schema `app` holds
+# security-definer helpers and must never be reachable by clients.
+project_id = "memory-nest"
+
+[api]
+schemas = ["public"]
+extra_search_path = ["public", "extensions"]
+
+[db]
+major_version = 16

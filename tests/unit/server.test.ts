@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { buildCsp } from "@/lib/csp";
 import { safeNextPath } from "@/lib/safe-redirect";
 import { redact } from "@/lib/server/logger";
-import { rateLimit, resetRateLimits } from "@/lib/server/rate-limit";
+import { rateLimit, rateLimitSize, resetRateLimits } from "@/lib/server/rate-limit";
 
 describe("safeNextPath", () => {
   it.each(["/nest", "/nest/abc?tab=tijdlijn"])("keeps same-site path %s", (path) => {
@@ -19,6 +19,22 @@ describe("safeNextPath", () => {
     "/\t/evil.example",
   ])("rejects %s", (value) => {
     expect(safeNextPath(value)).toBe("/nest");
+  });
+});
+
+describe("safeNextPath result", () => {
+  it("never resolves to another origin, whatever goes in", () => {
+    for (const input of [
+      "/.//evil.example",
+      "/a/..//evil.example",
+      "/././/evil.example",
+      "/nest",
+      "/x/../nest",
+    ]) {
+      expect(new URL(safeNextPath(input), "https://app.example/auth/confirm").origin).toBe(
+        "https://app.example",
+      );
+    }
   });
 });
 
@@ -51,6 +67,11 @@ describe("rateLimit", () => {
     expect(rateLimit("mail:other@b.nl", 3, 1000, 0)).toBe(true);
     expect(rateLimit("mail:a@b.nl", 3, 1000, 1001)).toBe(true);
   });
+  it("cannot be made to grow without bound by inventing keys", () => {
+    resetRateLimits();
+    for (let i = 0; i < 25_000; i += 1) rateLimit(`ip:spoof-${i}`, 10, 60_000, 0);
+    expect(rateLimitSize()).toBeLessThanOrEqual(10_001);
+  });
 });
 
 describe("logger redaction", () => {
@@ -70,6 +91,26 @@ describe("logger redaction", () => {
       access_token: "[redacted]",
       cost_cents: 3,
       family_id: "f",
+    });
+  });
+});
+
+describe("security review regressions", () => {
+  it.each([
+    "/.//evil.example/x",
+    "/..//evil.example",
+    "/%2e//evil.example",
+    "/nest/../..//evil.example?a=1",
+  ])("safeNextPath rejects the dot-segment redirect %s", (value) => {
+    expect(safeNextPath(value)).toBe("/nest");
+  });
+
+  it("redacts inside nested objects and arrays too", () => {
+    const out = redact({
+      meta: { user: { email: "a@b.nl" }, items: [{ transcript: "x", ok: 1 }] },
+    });
+    expect(out).toEqual({
+      meta: { user: { email: "[redacted]" }, items: [{ transcript: "[redacted]", ok: 1 }] },
     });
   });
 });
