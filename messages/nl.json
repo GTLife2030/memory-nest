@@ -236,5 +236,382 @@
       "body": "Zodra je iets vertelt, verschijnt het hier.",
       "action": "Vertel je eerste verhaal"
     }
+  },
+  "voorbeeld": {
+    "marker": "Voorbeeld",
+    "markerDetail": "Dit is een voorbeeld. Niets wordt bewaard, verstuurd of afgerekend.",
+    "title": "Voorbeeld van alle stappen",
+    "backToMap": "Terug naar het overzicht",
+    "stepOf": "Stap {step} van {total}",
+    "back": "Vorige",
+    "next": "Verder",
+    "done": "Klaar",
+    "persona": {
+      "legend": "Bekijk als",
+      "apply": "Wissel",
+      "current": "Je kijkt nu mee als {name}.",
+      "marieke": "Marieke, jonge ouder",
+      "truus": "Oma Truus, verteller",
+      "joris": "Joris, ouder"
+    },
+    "map": {
+      "heading": "Zo werkt Memory Nest, stap voor stap",
+      "lead": "Hier kun je door alle onderdelen heen klikken. Alles is nagebootst met de verzonnen familie De Wit.",
+      "begin": "Bekijk",
+      "soon": "Volgt in een latere levering",
+      "minutes": "{count, plural, one {# scherm} other {# schermen}}",
+      "groups": {
+        "start": "Beginnen",
+        "tell": "Vertellen",
+        "nest": "Het nest",
+        "later": "Wat nog komt"
+      },
+      "flows": {
+        "onboarding": {
+          "title": "Een nest beginnen",
+          "body": "Voor wie is het, waarover wil je vertellen en hoe vaak."
+        },
+        "cadeau": {
+          "title": "Een cadeau ontvangen",
+          "body": "Je kreeg Memory Nest van je kind. Zo begin je."
+        },
+        "vraag": {
+          "title": "De vraag van deze week",
+          "body": "Een vraag krijgen en je antwoord inspreken."
+        },
+        "foto": {
+          "title": "Vertel eens over deze foto",
+          "body": "Een oude foto als begin van een verhaal."
+        },
+        "verhaal": {
+          "title": "Van opname naar hoofdstuk",
+          "body": "Je opname wordt een verhaal dat je naleest en goedkeurt."
+        },
+        "nest": {
+          "title": "Rondkijken in het nest",
+          "body": "Verhalen, tijdlijn, personen, hoofdstukken en zoeken."
+        },
+        "nestje": {
+          "title": "Praten met Nestje",
+          "body": "De interviewer die doorvraagt, in de browser of aan de telefoon."
+        },
+        "boek": {
+          "title": "Het boek en het luisterboek",
+          "body": "Samenstellen, bekijken en bestellen."
+        },
+        "betalen": {
+          "title": "Pakketten en betalen",
+          "body": "Kiezen, afrekenen en een cadeaucode geven."
+        },
+        "capsule": {
+          "title": "Een bericht voor later",
+          "body": "Schrijven of opnemen, verzegelen en later laten opengaan."
+        },
+        "nalatenschap": {
+          "title": "Vertrouwenspersonen",
+          "body": "Wie zorgt voor het nest als jij dat niet meer kunt."
+        },
+        "familie": {
+          "title": "Familie uitnodigen",
+          "body": "Vertellers, meelezers en ontvangers."
+        }
+      }
+    },
+    "onboarding": {
+      "title": "Een nest beginnen",
+      "who": {
+        "heading": "Voor wie is dit nest?",
+        "hint": "Je kunt dit later nog veranderen.",
+        "baby": "Voor mijn kind dat net geboren is",
+        "babyHint": "Kleine momenten van het eerste jaar.",
+        "self": "Voor mijn eigen levensverhaal",
+        "selfHint": "Vertel over je jeugd, je werk en wat je hebt geleerd.",
+        "parent": "Voor mijn vader of moeder",
+        "parentHint": "Je geeft het als cadeau. Zij vertellen.",
+        "later": "Ik wil dingen vastleggen voor later",
+        "laterHint": "In je eigen tempo. Niets hoeft."
+      },
+      "name": {
+        "heading": "Wie gaat er vertellen?",
+        "nameLabel": "Naam van de verteller",
+        "nameHint": "Zo noemen we de verteller in het nest. Bijvoorbeeld Oma Truus.",
+        "relationLabel": "Wie is dat voor de kinderen?",
+        "relationHint": "Bijvoorbeeld oma, papa of tante."
+      },
+      "themes": {
+        "heading": "Waar wil je over vertellen?",
+        "hint": "Kies er zoveel als je wilt. De vragen passen zich aan."
+      },
+      "rhythm": {
+        "heading": "Hoe vaak wil je een vraag?",
+        "weekly": "Elke week",
+        "weeklyHint": "De meeste mensen kiezen dit.",
+        "biweekly": "Om de week",
+        "biweeklyHint": "Iets rustiger.",
+        "monthly": "Eén keer per maand",
+        "monthlyHint": "Voor als je weinig tijd of energie hebt."
+      },
+      "channel": {
+        "heading": "Hoe wil je de vraag krijgen?",
+        "app": "In de app",
+        "appHint": "Je krijgt een melding op je telefoon.",
+        "email": "Per e-mail",
+        "emailHint": "Met een knop om meteen te vertellen.",
+        "whatsapp": "Via WhatsApp",
+        "whatsappHint": "Je antwoordt met een spraakbericht.",
+        "phone": "Nestje belt mij",
+        "phoneHint": "Op een vaste dag en tijd. Je hoeft niets te typen."
+      },
+      "cover": {
+        "heading": "Kies hoe je nest eruitziet",
+        "hint": "Dit wordt later ook de stijl van het boek.",
+        "linnen": "Linnen",
+        "linnenHint": "Klassiek en rustig.",
+        "zand": "Zand",
+        "zandHint": "Veel ruimte voor foto's.",
+        "eerste_jaar": "Eerste jaar",
+        "eerste_jaarHint": "Licht en speels, voor een baby."
+      },
+      "ready": {
+        "heading": "Je nest staat klaar",
+        "body": "Dit heb je gekozen. Je kunt alles later aanpassen.",
+        "forLabel": "Voor",
+        "tellerLabel": "Verteller",
+        "themesLabel": "Onderwerpen",
+        "rhythmLabel": "Hoe vaak",
+        "channelLabel": "Hoe",
+        "coverLabel": "Stijl",
+        "noThemes": "Nog niets gekozen",
+        "noName": "Nog geen naam",
+        "elder": "Wil je grotere letters en knoppen? Dat zet je rechtsboven aan met Grote letters aan.",
+        "cta": "Naar de eerste vraag"
+      }
+    },
+    "cadeau": {
+      "title": "Een cadeau ontvangen",
+      "welcome": {
+        "heading": "Je hebt een cadeau gekregen van Lotte",
+        "body": "Lotte wil graag jouw verhalen bewaren. Je hoeft niets te schrijven. Je vertelt het gewoon.",
+        "note": "Lieve mam, ik wil zo graag weten hoe het vroeger bij jullie thuis was. Vertel je het mij?",
+        "noteFrom": "Lotte",
+        "codeLabel": "Je cadeaucode",
+        "codeHint": "Deze staat op de kaart die je kreeg.",
+        "cta": "Maak mijn cadeau open"
+      },
+      "what": {
+        "heading": "Dit zit erin",
+        "items": {
+          "year": "Twaalf maanden lang elke week een vraag",
+          "calls": "Zes gesprekken met Nestje, aan de telefoon of op de computer",
+          "book": "Een gebonden boek met je verhalen",
+          "audio": "In het boek staan codes. Wie ze scant, hoort jouw stem."
+        },
+        "how": "Je vertelt in je eigen tempo. Elke vraag kun je overslaan.",
+        "cta": "Hoe werkt het vertellen?"
+      },
+      "first": {
+        "heading": "Zullen we beginnen met één vraag?",
+        "body": "Lotte heeft zelf een vraag voor je bedacht.",
+        "askedBy": "Gevraagd door Lotte",
+        "cta": "Vertel het",
+        "later": "Liever een andere keer"
+      }
+    },
+    "vraag": {
+      "title": "De vraag van deze week",
+      "ask": {
+        "heading": "De vraag van deze week",
+        "eyebrow": "Vraag van deze week · Jeugd",
+        "tell": "Vertel het",
+        "type": "Liever typen",
+        "skip": "Andere vraag",
+        "skipped": "Geen probleem. Hier is een andere vraag."
+      },
+      "record": {
+        "heading": "Vertel maar",
+        "hint": "Neem de tijd. Je kunt pauzeren zo vaak je wilt. Er loopt geen klok af.",
+        "finish": "Ik ben klaar",
+        "needStart": "Tik eerst op de ronde knop om te beginnen."
+      },
+      "type": {
+        "heading": "Schrijf het op",
+        "label": "Jouw antwoord",
+        "hint": "Een paar regels is genoeg.",
+        "finish": "Bewaar"
+      },
+      "review": {
+        "heading": "Luister het terug",
+        "body": "Zo klinkt je opname. Ben je tevreden?",
+        "play": "Afspelen",
+        "pause": "Pauzeren",
+        "again": "Opnieuw opnemen",
+        "keep": "Bewaar deze opname",
+        "length": "Opname van {duration}"
+      },
+      "saved": {
+        "heading": "Je verhaal is bewaard",
+        "body": "We schrijven het nu voor je uit. Over een paar minuten kun je het nalezen.",
+        "next": "Bekijk hoe het een hoofdstuk wordt",
+        "typedBody": "Je kunt het altijd nog aanvullen of aanpassen."
+      }
+    },
+    "recorder": {
+      "idle": "Tik om te vertellen",
+      "recording": "Ik luister. Tik om te pauzeren",
+      "paused": "Gepauzeerd. Tik om verder te gaan",
+      "waveform": "Geluidsgolf van je opname"
+    },
+    "foto": {
+      "title": "Vertel eens over deze foto",
+      "pick": {
+        "heading": "Kies een foto",
+        "hint": "In het echt maak je hier een foto van een oude afdruk, of kies je er een van je telefoon.",
+        "legend": "Welke foto?"
+      },
+      "suggest": {
+        "heading": "Wat we op de foto zien",
+        "label": "Voorstel, door AI gemaakt",
+        "note": "Dit is een schatting. Klopt het niet? Dan pas je het aan. We herkennen nooit wie er op een foto staat.",
+        "descriptionLabel": "Beschrijving",
+        "decadeLabel": "Wanneer",
+        "cta": "Vertel erover"
+      },
+      "tell": {
+        "heading": "Vertel eens"
+      }
+    },
+    "verhaal": {
+      "title": "Van opname naar hoofdstuk",
+      "processing": {
+        "heading": "We maken er een verhaal van",
+        "body": "Dit duurt in het echt een paar minuten. Je hoeft er niet op te wachten.",
+        "steps": {
+          "transcribe": "Uitschrijven wat je zei",
+          "clean": "Haperingen en herhalingen weghalen",
+          "write": "Er een leesbaar verhaal van maken, in jouw woorden",
+          "extract": "Namen, plaatsen en jaartallen opzoeken"
+        },
+        "done": "Klaar",
+        "busy": "Bezig",
+        "waiting": "Nog niet begonnen",
+        "cta": "Lees het verhaal"
+      },
+      "review": {
+        "heading": "Lees het na",
+        "aiBadge": "bewerkt met AI",
+        "aiNote": "Dit verhaal is door AI uitgeschreven. Er is niets aan toegevoegd. Jij beslist of het klopt.",
+        "tapHint": "Tik op een alinea om te horen wat je precies zei.",
+        "sourceHeading": "Wat je zei",
+        "sourceTime": "Fragment van {start} tot {end}",
+        "sourceClose": "Sluit fragment",
+        "found": "Dit vonden we in je verhaal",
+        "people": "Personen",
+        "places": "Plaatsen",
+        "when": "Wanneer",
+        "flagHeading": "Even controleren",
+        "flag": "Je noemt mevrouw Smulders bij naam. Wil je dat zo laten staan?",
+        "edit": "Iets aanpassen",
+        "approve": "Het klopt zo"
+      },
+      "edit": {
+        "heading": "Pas je verhaal aan",
+        "label": "Tekst van je verhaal",
+        "hint": "Je kunt alles veranderen. De opname blijft zoals hij is.",
+        "save": "Bewaar wijzigingen"
+      },
+      "share": {
+        "heading": "Wie mag dit lezen?",
+        "private": "Alleen ik",
+        "privateHint": "Niemand anders ziet het, tot jij dat wilt.",
+        "family": "Mijn familie",
+        "familyHint": "Iedereen in het nest kan het lezen.",
+        "vault": "In de kluis",
+        "vaultHint": "Alleen voor jou en de beheerder. Wordt nooit door AI bewerkt. Dit kies je voordat je vertelt.",
+        "cta": "Keur het verhaal goed"
+      },
+      "approved": {
+        "heading": "Je hoofdstuk staat in het nest",
+        "body": "Het label bewerkt met AI is weg, want jij hebt het goedgekeurd.",
+        "followHeading": "Wil je hier nog meer over vertellen?",
+        "followTell": "Vertel hierover",
+        "toNest": "Bekijk het in het nest"
+      },
+      "followUps": [
+        "Hoe rook het 's ochtends vroeg in de bakkerij?",
+        "Wat zei mevrouw Smulders als het brood nog niet klaar was?"
+      ]
+    },
+    "nest": {
+      "title": "Het nest van Familie de Wit",
+      "nav": {
+        "label": "Onderdelen van het nest",
+        "week": "Deze week",
+        "stories": "Verhalen",
+        "timeline": "Tijdlijn",
+        "people": "Personen",
+        "chapters": "Hoofdstukken",
+        "search": "Zoeken"
+      },
+      "week": {
+        "heading": "Deze week",
+        "greeting": "Dag {name}",
+        "newHeading": "Nieuw in het nest",
+        "reviewHeading": "Wacht op jou",
+        "reviewBody": "Dit verhaal is uitgeschreven. Lees je het even na?",
+        "reviewCta": "Lees het na",
+        "bookProgress": "{done} van de {total} verhalen staan in het boek"
+      },
+      "stories": {
+        "heading": "Verhalen",
+        "count": "{count, plural, one {# verhaal} other {# verhalen}}",
+        "audio": "Met opname",
+        "needsReview": "Nog nalezen",
+        "ai": "bewerkt met AI",
+        "filterLegend": "Laat zien",
+        "all": "Alles",
+        "byTeller": "Van {name}"
+      },
+      "story": {
+        "toldBy": "Verteld door {name}",
+        "back": "Terug naar alle verhalen",
+        "tapHint": "Tik op een alinea om de echte opname te horen.",
+        "sourceHeading": "Zo werd het verteld",
+        "inChapter": "Hoofdstuk: {chapter}"
+      },
+      "timeline": {
+        "heading": "Tijdlijn",
+        "zoomLegend": "Hoe dichtbij?",
+        "decade": "Per tien jaar",
+        "year": "Per jaar",
+        "month": "Per maand",
+        "decadeLabel": "Jaren {decade}",
+        "empty": "Geen momenten in deze periode."
+      },
+      "people": {
+        "heading": "Personen",
+        "hint": "Personen voeg je zelf toe. We herkennen nooit gezichten op foto's.",
+        "born": "Geboren in {year}",
+        "mentions": "{count, plural, =0 {Nog niet genoemd} one {Genoemd in # verhaal} other {Genoemd in # verhalen}}"
+      },
+      "chapters": {
+        "heading": "Hoofdstukken",
+        "hint": "De volgorde hier wordt de volgorde in het boek.",
+        "empty": "Nog geen verhalen in dit hoofdstuk.",
+        "up": "{title} omhoog",
+        "down": "{title} omlaag",
+        "moved": "{title} staat nu op plaats {position}."
+      },
+      "search": {
+        "heading": "Zoeken",
+        "label": "Waar zoek je naar?",
+        "hint": "Bijvoorbeeld een naam, een plaats of een woord. Je krijgt de echte passages terug, met de opname erbij.",
+        "submit": "Zoek",
+        "tryLegend": "Of probeer",
+        "resultsCount": "{count, plural, =0 {Niets gevonden} one {# passage gevonden} other {# passages gevonden}}",
+        "noResults": "We vonden niets met dit woord. Probeer een ander woord, of een naam.",
+        "from": "Uit {title}, verteld door {name}",
+        "examples": ["bakkerij", "Henk", "nootmuskaat"]
+      }
+    }
   }
 }

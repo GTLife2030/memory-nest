@@ -3,12 +3,14 @@ import { describe, expect, it } from "vitest";
 import en from "@/messages/en.json";
 import nl from "@/messages/nl.json";
 
-type Tree = { [key: string]: string | Tree };
+type Tree = { [key: string]: string | string[] | Tree };
 const flatten = (tree: Tree, prefix = ""): [string, string][] =>
   Object.entries(tree).flatMap(([key, value]) =>
     typeof value === "string"
       ? [[prefix + key, value] as [string, string]]
-      : flatten(value, `${prefix}${key}.`),
+      : Array.isArray(value)
+        ? value.map((item, index) => [`${prefix}${key}.${index}`, item] as [string, string])
+        : flatten(value, `${prefix}${key}.`),
   );
 
 const dutch = flatten(nl);

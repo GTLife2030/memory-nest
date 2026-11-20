@@ -6,7 +6,30 @@ import {
   setElderMode,
 } from "./helpers";
 
-// Every screen of phase 0, in normal and in elder mode.
+// Every screen of the clickable mock-up: each flow step has its own address (?stap=).
+const steps = (flow: string, count: number) =>
+  Array.from({ length: count }, (_, i) => ({
+    name: `mock-up ${flow} step ${i + 1}`,
+    path: `/voorbeeld/${flow}?stap=${i + 1}`,
+  }));
+const mockup = [
+  { name: "mock-up map", path: "/voorbeeld" },
+  ...steps("onboarding", 7),
+  ...steps("cadeau", 3),
+  ...steps("vraag", 4),
+  ...steps("foto", 3),
+  ...steps("verhaal", 5),
+  { name: "mock-up nest home", path: "/voorbeeld/nest" },
+  { name: "mock-up stories", path: "/voorbeeld/nest/verhalen" },
+  { name: "mock-up story", path: "/voorbeeld/nest/verhalen/bakkerij" },
+  { name: "mock-up timeline decades", path: "/voorbeeld/nest/tijdlijn" },
+  { name: "mock-up timeline months", path: "/voorbeeld/nest/tijdlijn?zoom=month" },
+  { name: "mock-up people", path: "/voorbeeld/nest/personen" },
+  { name: "mock-up chapters", path: "/voorbeeld/nest/hoofdstukken" },
+  { name: "mock-up search results", path: "/voorbeeld/nest/zoeken?q=bakkerij" },
+];
+
+// Every screen, in normal and in elder mode.
 const routes = [
   { name: "landing", path: "/" },
   { name: "sign in", path: "/inloggen" },
@@ -14,7 +37,7 @@ const routes = [
   { name: "design gallery", path: "/design" },
   { name: "offline", path: "/offline" },
   { name: "not found", path: "/deze-pagina-bestaat-niet" },
-  ...(hasSupabase ? [] : [{ name: "demo nest", path: "/nest/demo" }]),
+  ...(hasSupabase ? [] : [{ name: "demo nest", path: "/nest/demo" }, ...mockup]),
 ];
 
 for (const elder of [false, true]) {

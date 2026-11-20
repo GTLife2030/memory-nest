@@ -13,6 +13,8 @@ type StoryCardProps = {
   aiLabel?: string;
   hasAudioLabel?: string;
   photo?: ReactNode;
+  /** Heading level of the title, so the card fits the outline of the page it is on. */
+  headingLevel?: 2 | 3;
   className?: string;
 };
 
@@ -25,8 +27,10 @@ export function StoryCard({
   aiLabel,
   hasAudioLabel,
   photo,
+  headingLevel = 3,
   className,
 }: StoryCardProps) {
+  const Heading = `h${headingLevel}` as const;
   return (
     <article
       className={cn(
@@ -37,11 +41,11 @@ export function StoryCard({
       {photo ? <div className="hidden w-28 shrink-0 sm:block">{photo}</div> : null}
       <div className="min-w-0 flex-1">
         <p className="text-taupe-dark text-sm">{meta}</p>
-        <h3 className="mt-1 text-2xl">
+        <Heading className="mt-1 text-2xl">
           <a href={href} className="after:rounded-card after:absolute after:inset-0">
             {title}
           </a>
-        </h3>
+        </Heading>
         <p className="font-book text-ink mt-2 line-clamp-3 text-lg">{excerpt}</p>
         {statusLabel || aiLabel || hasAudioLabel ? (
           <ul className="mt-4 flex flex-wrap gap-2 text-sm">

@@ -23,6 +23,8 @@ export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request: { headers: requestHeaders } });
   const { pathname } = request.nextUrl;
   const wantsNest = pathname === "/nest" || pathname.startsWith("/nest/");
+  // The clickable mock-up is for signed-in visitors too (when a database is configured).
+  const wantsMockup = pathname === "/voorbeeld" || pathname.startsWith("/voorbeeld/");
 
   if (!supabaseConfigured) {
     // Without a database only the read-only demo nest exists; /nest itself forwards to it.
@@ -47,7 +49,7 @@ export async function proxy(request: NextRequest) {
     );
     // getUser() validates the token with the auth server and refreshes it when needed.
     const { data } = await supabase.auth.getUser();
-    if (wantsNest && !data.user) {
+    if ((wantsNest || wantsMockup) && !data.user) {
       const login = new URL("/inloggen", request.url);
       login.searchParams.set("next", pathname);
       const redirect = NextResponse.redirect(login);

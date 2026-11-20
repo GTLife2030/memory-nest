@@ -8,12 +8,29 @@ const base = process.env.E2E_BASE_URL ?? "http://127.0.0.1:3100";
 const out = `docs/screenshots/${phase}`;
 await mkdir(out, { recursive: true });
 
-const screens = [
-  ["landing", "/"],
-  ["inloggen", "/inloggen"],
-  ["nest", "/nest/demo"],
-  ["design", "/design"],
-];
+const sets = {
+  "phase-0": [
+    ["landing", "/"],
+    ["inloggen", "/inloggen"],
+    ["nest", "/nest/demo"],
+    ["design", "/design"],
+  ],
+  "voorbeeld-1": [
+    ["kaart", "/voorbeeld"],
+    ["onboarding-1", "/voorbeeld/onboarding"],
+    ["onboarding-7", "/voorbeeld/onboarding?stap=7"],
+    ["cadeau-1", "/voorbeeld/cadeau"],
+    ["vraag-1", "/voorbeeld/vraag"],
+    ["vraag-2", "/voorbeeld/vraag?stap=2"],
+    ["foto-2", "/voorbeeld/foto?stap=2"],
+    ["verhaal-2", "/voorbeeld/verhaal?stap=2"],
+    ["nest-week", "/voorbeeld/nest"],
+    ["nest-tijdlijn", "/voorbeeld/nest/tijdlijn"],
+    ["nest-hoofdstukken", "/voorbeeld/nest/hoofdstukken"],
+    ["nest-zoeken", "/voorbeeld/nest/zoeken?q=bakkerij"],
+  ],
+};
+const screens = sets[phase] ?? sets["phase-0"];
 const variants = [
   ["desktop", { viewport: { width: 1280, height: 800 }, deviceScaleFactor: 2 }, false],
   ["telefoon", devices["Pixel 7"], false],

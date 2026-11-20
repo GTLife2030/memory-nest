@@ -1,6 +1,8 @@
 # Clickable mock-up of all flows
 
-Status: **proposed, waiting for "go"** · 2026-11-20
+Status: **approved 2026-11-20; batch 1 delivered, batches 2 and 3 to do**
+
+Founder decisions: inside the app at `/voorbeeld`; behind sign-in; three batches in the proposed order.
 
 ## Goal
 
