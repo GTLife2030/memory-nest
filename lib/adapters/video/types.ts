@@ -6,9 +6,7 @@ export interface VideoAdapter {
     familyId: string;
     maxDurationS: number;
   }): Promise<Costed<{ assetId: string; uploadUrl: string }>>;
-  getPlayback(
-    assetId: string,
-  ): Promise<{
+  getPlayback(assetId: string): Promise<{
     assetId: string;
     status: "processing" | "ready" | "failed";
     playbackUrl: string | null;
