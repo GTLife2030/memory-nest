@@ -56,9 +56,19 @@ schemas (ADR-002). With Docker, prefer `supabase start` and `supabase test db`.
 
 ## Deploy
 
-Not decided yet (ADR pending): Vercel with functions in an EU region, or an EU-only host.
-Requirements either way: Node 22, the variables from `.env.example`, HTTPS, EU region.
-The worker deploys from `worker/Dockerfile` to an EU container host with `WORKER_TOKEN` set.
+Web app: Vercel, functions in Dublin (`vercel.json`, ADR-008). Every push gets a preview URL;
+`main` is production.
+
+1. vercel.com → import `GTLife2030/memory-nest`. Root directory: the repository root (`./`), not
+   `worker`. Framework: Next.js (detected).
+2. Environment variables (Production and Preview): `NEXT_PUBLIC_SITE_URL` (the deployment URL),
+   and for real sign-in `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`,
+   `SUPABASE_SERVICE_ROLE_KEY`. Without the Supabase three the deployment runs in demo mode.
+3. Deploy. Check `/api/health`; the response header `x-vercel-id` should mention `dub1`.
+4. For real sign-in: apply the migrations and set the Auth URLs as described under "Supabase project".
+
+The worker does not run on Vercel. It deploys from `worker/Dockerfile` to an EU container host
+with `WORKER_TOKEN` set (host decided in phase 3).
 
 ## Incidents
 
