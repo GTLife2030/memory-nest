@@ -1,26 +1,128 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Design tokens. The palette and type scale come from the brand brief; components only ever use
+   these names, never raw values. */
+@theme {
+  --color-cream: #f7f1e8;
+  --color-sand: #eadfcf;
+  --color-linen: #fbf8f3;
+  --color-taupe: #8b7d6b;
+  --color-taupe-dark: #5e5346;
+  --color-terracotta: #b8664a;
+  --color-terracotta-dark: #94503a;
+  --color-rose: #d9a5a0;
+  --color-ink: #2e2a26;
+  --color-success: #5f7a5a;
+  --color-warning: #b8893a;
+  --color-error: #a3473b;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-heading: "Fraunces Variable", "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Inter Variable", "Source Sans 3", system-ui, sans-serif;
+  --font-book: "EB Garamond Variable", "Literata", Georgia, serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --radius-card: 14px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 2px 12px rgba(46, 42, 38, 0.06);
+  --shadow-lift: 0 6px 24px rgba(46, 42, 38, 0.1);
+
+  --ease-gentle: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --animate-ring: ring 2.4s var(--ease-gentle) infinite;
+  --animate-rise: rise 200ms ease-out both;
+
+  @keyframes ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.55;
+    }
+    70%,
+    100% {
+      transform: scale(1.55);
+      opacity: 0;
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
+/* Everything is sized in rem, so elder mode is one change: a larger root size and larger targets. */
+:root {
+  font-size: 18px;
+  --target: 2.75rem; /* 49.5px at 18px */
+}
+:root[data-elder="true"] {
+  font-size: 21px;
+  --target: 2.6667rem; /* 56px at 21px */
+}
+
+html {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100dvh;
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-optical-sizing: auto;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  /* Dutch compounds ("Ontwerpsysteem", "Vertrouwenspersoon") must never widen a phone screen. */
+  hyphens: auto;
+  overflow-wrap: anywhere;
+}
+
+p {
+  max-width: 68ch;
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-terracotta-dark);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--color-rose);
+  color: var(--color-ink);
+}
+
+@utility min-target {
+  min-height: var(--target);
+  min-width: var(--target);
+}
+
+@utility paper {
+  background-color: var(--color-linen);
+  background-image: radial-gradient(rgba(139, 125, 107, 0.07) 1px, transparent 1px);
+  background-size: 5px 5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

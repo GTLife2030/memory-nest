@@ -1,0 +1,229 @@
+{
+  "common": {
+    "brand": "Memory Nest",
+    "tagline": "Een blijvende herinnering tussen generaties",
+    "promise": "Je hoeft niets te schrijven. Vertel het gewoon.",
+    "skipToContent": "Ga naar de inhoud",
+    "close": "Sluiten",
+    "notifications": "Meldingen",
+    "signIn": "Inloggen",
+    "signOut": "Uitloggen",
+    "back": "Terug",
+    "home": "Naar het begin",
+    "mainNav": "Hoofdmenu"
+  },
+  "demo": {
+    "badge": "demo-modus",
+    "detail": "Deze diensten zijn nu nagebootst: {services}. Er wordt niets verstuurd of afgerekend.",
+    "services": {
+      "llm": "verhaalredacteur",
+      "voice": "interviewer Nestje",
+      "stt": "spraak naar tekst",
+      "storage": "opslag",
+      "video": "video",
+      "print": "drukwerk",
+      "payments": "betalen",
+      "email": "e-mail",
+      "whatsapp": "WhatsApp",
+      "telephony": "bellen"
+    }
+  },
+  "elder": {
+    "on": "Grote letters aan",
+    "off": "Grote letters uit",
+    "hint": "Maakt tekst en knoppen groter."
+  },
+  "marketing": {
+    "title": "Memory Nest — een blijvende herinnering tussen generaties",
+    "description": "Bewaar de verhalen van je familie in je eigen woorden en met je eigen stem. Privé, veilig en straks ook als boek.",
+    "heading": "Je hoeft niets te schrijven. Vertel het gewoon.",
+    "lead": "Memory Nest bewaart de verhalen van je familie: in je eigen woorden, met je eigen stem, voor de mensen die na je komen.",
+    "cta": "Begin je nest",
+    "secondaryCta": "Ik heb al een nest",
+    "pillars": {
+      "heading": "Zo werkt het",
+      "tell": {
+        "title": "Vertel",
+        "body": "Elke week een vraag. Je antwoordt met je stem, een foto of een paar regels. Ook gewoon aan de telefoon."
+      },
+      "keep": {
+        "title": "Bewaar",
+        "body": "Elk verhaal blijft van jou. Privé, in Europa opgeslagen, en altijd in één keer te downloaden."
+      },
+      "pass": {
+        "title": "Geef door",
+        "body": "Als boek, als luisterverhaal, of als bericht dat pas later opengaat."
+      }
+    },
+    "trust": {
+      "heading": "Wat we niet doen",
+      "body": "We klonen geen stemmen en maken geen digitale dubbelgangers. Je hoort altijd de echte opname."
+    },
+    "footer": "Gemaakt in Nederland."
+  },
+  "auth": {
+    "title": "Inloggen",
+    "heading": "Welkom terug",
+    "lead": "Vul je e-mailadres in. Je krijgt een mail met een knop om in te loggen. Een wachtwoord heb je niet nodig.",
+    "emailLabel": "E-mailadres",
+    "emailHint": "Bijvoorbeeld naam@voorbeeld.nl",
+    "submit": "Stuur mij een inloglink",
+    "submitting": "Bezig met versturen…",
+    "errors": {
+      "invalidEmail": "Dit lijkt geen e-mailadres. Kijk je het even na?",
+      "rateLimited": "Je hebt net al een paar keer een link gevraagd. Probeer het over een kwartier opnieuw.",
+      "generic": "Het versturen lukte niet. Probeer het zo nog eens.",
+      "linkExpired": "Deze inloglink werkt niet meer. Vraag hieronder een nieuwe aan."
+    },
+    "sent": {
+      "title": "Kijk in je mail",
+      "heading": "Kijk in je mail",
+      "body": "We hebben een mail gestuurd naar {email}. Klik op de knop in die mail om in te loggen.",
+      "bodyNoEmail": "We hebben je een mail gestuurd. Klik op de knop in die mail om in te loggen.",
+      "spam": "Geen mail gezien? Kijk ook bij ongewenste mail. De link blijft een uur geldig.",
+      "again": "Ander e-mailadres gebruiken"
+    },
+    "notConfigured": {
+      "heading": "Inloggen staat nog uit",
+      "body": "Deze omgeving is nog niet met de database verbonden. Je kunt wel alvast rondkijken in het voorbeeldnest van familie De Wit.",
+      "cta": "Bekijk het voorbeeldnest"
+    }
+  },
+  "nest": {
+    "title": "Het nest van {family}",
+    "defaultFamilyName": "Ons nest",
+    "greeting": "Dag {name}",
+    "greetingAnonymous": "Welkom",
+    "thisWeek": "Deze week",
+    "empty": {
+      "title": "Hier komen jullie verhalen",
+      "body": "Je nest staat klaar. Binnenkort stel je hier je eerste vraag en neem je je eerste verhaal op."
+    },
+    "role": {
+      "owner": "Beheerder",
+      "co_author": "Verteller",
+      "recipient": "Ontvanger",
+      "legacy_contact": "Vertrouwenspersoon",
+      "viewer": "Meelezer"
+    },
+    "roleLabel": "Jouw rol: {role}",
+    "demoNotice": "Dit is een voorbeeldnest. Je kunt hier niets wijzigen.",
+    "stories": "Verhalen",
+    "timeline": "Tijdlijn",
+    "question": {
+      "eyebrow": "Vraag van deze week · Jeugd",
+      "tell": "Vertel het",
+      "type": "Liever typen",
+      "skip": "Overslaan",
+      "soon": "Opnemen kan vanaf de volgende versie."
+    },
+    "story": {
+      "approvedAudio": "Met opname",
+      "needsReview": "Nog nalezen",
+      "ai": "bewerkt met AI"
+    },
+    "capsule": {
+      "heading": "Voor later",
+      "sealed": "Verzegeld tot {date}"
+    }
+  },
+  "errors": {
+    "notFound": {
+      "title": "Deze pagina bestaat niet",
+      "body": "Misschien is het adres veranderd, of heb je geen toegang tot dit nest."
+    },
+    "generic": {
+      "title": "Er ging iets mis",
+      "body": "Dat ligt aan ons, niet aan jou. Je verhalen zijn veilig. Probeer het zo nog eens.",
+      "retry": "Opnieuw proberen"
+    }
+  },
+  "offline": {
+    "title": "Geen verbinding",
+    "heading": "Je bent even niet verbonden",
+    "body": "Zodra je weer internet hebt, gaat alles verder waar je was."
+  },
+  "design": {
+    "title": "Ontwerpsysteem",
+    "heading": "Ontwerpsysteem",
+    "lead": "Alle bouwstenen van Memory Nest op één pagina, in elke toestand.",
+    "sections": {
+      "colors": "Kleuren",
+      "type": "Letters",
+      "buttons": "Knoppen",
+      "cards": "Kaarten",
+      "question": "Vraagkaart",
+      "record": "Opnemen",
+      "photo": "Foto",
+      "timeline": "Tijdlijn",
+      "progress": "Voortgang",
+      "feedback": "Meldingen en dialoog",
+      "empty": "Lege toestand"
+    },
+    "type": {
+      "heading": "Vertel eens over de bakkerij",
+      "body": "Mijn vader had een bakkerij aan de Heuvel in Tilburg. Om vier uur 's ochtends stond hij al op.",
+      "book": "Om vier uur 's ochtends rook het hele huis naar vers brood. Ik mocht op zaterdag de krentenbollen tellen.",
+      "headingLabel": "Koppen — Fraunces",
+      "bodyLabel": "Lopende tekst — Inter",
+      "bookLabel": "Boek — EB Garamond"
+    },
+    "buttons": {
+      "primary": "Vertel het",
+      "secondary": "Liever typen",
+      "ghost": "Overslaan",
+      "danger": "Verwijderen",
+      "disabled": "Niet beschikbaar",
+      "large": "Begin je nest",
+      "icon": "Afspelen"
+    },
+    "card": {
+      "plain": "Een gewone kaart voor rustige inhoud."
+    },
+    "story": {
+      "title": "De bakkerij van mijn vader",
+      "meta": "Oma Truus · jaren vijftig",
+      "excerpt": "Mijn vader had een bakkerij aan de Heuvel in Tilburg. Om vier uur 's ochtends stond hij al op, en dan rook het hele huis naar vers brood.",
+      "draftTitle": "Verkering op de kermis",
+      "draftMeta": "Oma Truus · 1966"
+    },
+    "question": {
+      "text": "Hoe rook het bij jullie thuis op zondag?",
+      "askedBy": "Gevraagd door Marieke"
+    },
+    "record": {
+      "idle": "Tik om te vertellen",
+      "recording": "Ik luister… tik om te pauzeren",
+      "paused": "Gepauzeerd. Tik om verder te gaan",
+      "waveform": "Geluidsfragment van 34 seconden"
+    },
+    "photo": {
+      "caption": "De bakkerij, omstreeks 1955",
+      "alt": "Voorbeeld van een oude foto",
+      "badge": "bewerkt met AI"
+    },
+    "timeline": {
+      "one": { "date": "1946", "title": "Geboren in Tilburg" },
+      "two": { "date": "Jaren vijftig", "title": "De bakkerij van mijn vader", "body": "Elke zaterdag krentenbollen tellen." },
+      "three": { "date": "14 maart 2026", "title": "Saar is geboren" }
+    },
+    "progress": {
+      "label": "3 van de 8 verhalen staan in het boek"
+    },
+    "feedback": {
+      "toastButton": "Laat een melding zien",
+      "toastTitle": "Je verhaal is bewaard",
+      "toastBody": "Je kunt het altijd nog aanpassen.",
+      "dialogButton": "Open dialoog",
+      "dialogTitle": "Dit verhaal in de kluis leggen?",
+      "dialogBody": "Een kluisverhaal is alleen voor jou en de beheerder. Het wordt nooit door AI bewerkt.",
+      "dialogConfirm": "In de kluis leggen",
+      "dialogCancel": "Toch niet"
+    },
+    "empty": {
+      "title": "Nog geen verhalen",
+      "body": "Zodra je iets vertelt, verschijnt het hier.",
+      "action": "Vertel je eerste verhaal"
+    }
+  }
+}
