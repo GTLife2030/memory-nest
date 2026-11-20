@@ -26,6 +26,23 @@ read-only demo nest.
 7. Run the RLS suite against the project: `supabase test db --linked`.
 8. Before real families: Pro plan (daily backups, no pausing), custom SMTP, restore test.
 
+### Sign-in mail (SMTP)
+
+The built-in mail server is for testing only (about two mails per hour). Sign-in mail goes through
+ImprovMX SMTP on our own domain (ADR-009, interim).
+
+1. ImprovMX: add the domain, upgrade to a plan with SMTP, add the DNS records it shows
+   (SPF `include:spf.improvmx.com`, two DKIM CNAMEs, a DMARC record; MX only if mail should also
+   be received), and wait until the domain shows as verified.
+2. ImprovMX: create an alias such as `nest@<domain>` and, under the domain's settings → SMTP
+   Credentials, a credential for it.
+3. Supabase → Authentication → Emails → SMTP Settings: enable custom SMTP; sender
+   `nest@<domain>`, name `Memory Nest`, host `smtp.improvmx.com`, port `587`, username the full
+   alias address, password the SMTP credential.
+4. Supabase → Authentication → Rate Limits: raise "emails per hour" from the default.
+5. Send a magic link to an outside address and check SPF, DKIM and DMARC all pass in the
+   message headers.
+
 ### Seeding
 
 `supabase/seed/seed.sql` creates demo family "Familie de Wit". Demo data only. It has been run

@@ -30,18 +30,19 @@ calls and WhatsApp.
 
 ## Processors
 
-| Processor       | Purpose                     | Region                                                                         | DPA     | Zero retention / no training | Status           |
-| --------------- | --------------------------- | ------------------------------------------------------------------------------ | ------- | ---------------------------- | ---------------- |
-| Supabase        | database, auth, storage     | **eu-west-1 (Ireland)**, see note                                              | to sign | n/a                          | project created  |
-| Vercel          | web app hosting             | functions in Dublin (dub1); static assets on a global edge network; US company | to sign | n/a                          | chosen (ADR-008) |
-| Worker host     | PDF, audio                  | EU, to decide                                                                  | to sign | n/a                          | phase 3          |
-| LLM provider    | story editing               | EU endpoint, to verify per contract                                            | to sign | to confirm in writing        | phase 2          |
-| ElevenLabs      | interviewer, speech to text | to verify                                                                      | to sign | to confirm in writing        | phase 2          |
-| Twilio          | phone calls                 | to verify                                                                      | to sign | n/a                          | phase 2          |
-| Mollie          | payments                    | EU                                                                             | to sign | n/a                          | phase 3          |
-| Peecho          | printing                    | NL                                                                             | to sign | n/a                          | phase 3          |
-| Postmark        | e-mail                      | to verify (US company)                                                         | to sign | n/a                          | phase 1          |
-| Meta (WhatsApp) | reminders                   | to verify                                                                      | to sign | n/a                          | phase 4          |
+| Processor       | Purpose                         | Region                                                                         | DPA     | Zero retention / no training | Status           |
+| --------------- | ------------------------------- | ------------------------------------------------------------------------------ | ------- | ---------------------------- | ---------------- |
+| Supabase        | database, auth, storage         | **eu-west-1 (Ireland)**, see note                                              | to sign | n/a                          | project created  |
+| Vercel          | web app hosting                 | functions in Dublin (dub1); static assets on a global edge network; US company | to sign | n/a                          | chosen (ADR-008) |
+| Worker host     | PDF, audio                      | EU, to decide                                                                  | to sign | n/a                          | phase 3          |
+| LLM provider    | story editing                   | EU endpoint, to verify per contract                                            | to sign | to confirm in writing        | phase 2          |
+| ElevenLabs      | interviewer, speech to text     | to verify                                                                      | to sign | to confirm in writing        | phase 2          |
+| Twilio          | phone calls                     | to verify                                                                      | to sign | n/a                          | phase 2          |
+| Mollie          | payments                        | EU                                                                             | to sign | n/a                          | phase 3          |
+| Peecho          | printing                        | NL                                                                             | to sign | n/a                          | phase 3          |
+| Postmark        | e-mail                          | to verify (US company)                                                         | to sign | n/a                          | phase 1          |
+| ImprovMX        | sign-in mail (interim, ADR-009) | to verify                                                                      | to sign | n/a                          | chosen, interim  |
+| Meta (WhatsApp) | reminders                       | to verify                                                                      | to sign | n/a                          | phase 4          |
 
 **Region.** The build prompt asked for Frankfurt (eu-central-1); the project is in Ireland
 (eu-west-1). The founder decided on 2026-11-20 that Ireland is fine: both are in the EU, so data
