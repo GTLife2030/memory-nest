@@ -73,7 +73,8 @@
       "invalidEmail": "Dit lijkt geen e-mailadres. Kijk je het even na?",
       "rateLimited": "Je hebt net al een paar keer een link gevraagd. Probeer het over een kwartier opnieuw.",
       "generic": "Het versturen lukte niet. Probeer het zo nog eens.",
-      "linkExpired": "Deze inloglink werkt niet meer. Vraag hieronder een nieuwe aan."
+      "linkExpired": "Deze inloglink werkt niet meer. Vraag hieronder een nieuwe aan.",
+      "mailLimit": "Er zijn net te veel inlogmails verstuurd. Dat ligt niet aan jou. Probeer het over een uur opnieuw."
     },
     "sent": {
       "title": "Kijk in je mail",
