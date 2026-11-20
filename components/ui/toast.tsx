@@ -35,7 +35,10 @@ type ToastProviderProps = {
 export function ToastProvider({ children, closeLabel, regionLabel }: ToastProviderProps) {
   const [messages, setMessages] = useState<ToastMessage[]>([]);
   const show = useCallback<ShowToast>((message) => {
-    setMessages((current) => [...current, { tone: "neutral", ...message, id: Date.now() + current.length }]);
+    setMessages((current) => [
+      ...current,
+      { tone: "neutral", ...message, id: Date.now() + current.length },
+    ]);
   }, []);
   const remove = useCallback((id: number) => {
     setMessages((current) => current.filter((message) => message.id !== id));
@@ -53,14 +56,16 @@ export function ToastProvider({ children, closeLabel, regionLabel }: ToastProvid
               if (!open) remove(message.id);
             }}
             className={cn(
-              "flex animate-rise items-start gap-3 rounded-card border-l-4 bg-linen p-5 shadow-lift",
+              "animate-rise rounded-card bg-linen shadow-lift flex items-start gap-3 border-l-4 p-5",
               tones[message.tone],
             )}
           >
             <div className="min-w-0 flex-1">
-              <ToastPrimitive.Title className="font-medium text-ink">{message.title}</ToastPrimitive.Title>
+              <ToastPrimitive.Title className="text-ink font-medium">
+                {message.title}
+              </ToastPrimitive.Title>
               {message.body ? (
-                <ToastPrimitive.Description className="mt-1 text-taupe-dark">
+                <ToastPrimitive.Description className="text-taupe-dark mt-1">
                   {message.body}
                 </ToastPrimitive.Description>
               ) : null}
@@ -72,7 +77,10 @@ export function ToastProvider({ children, closeLabel, regionLabel }: ToastProvid
             </ToastPrimitive.Close>
           </ToastPrimitive.Root>
         ))}
-        <ToastPrimitive.Viewport label={`${regionLabel} ({hotkey})`} className="fixed right-4 bottom-4 z-50 flex w-[min(92vw,24rem)] flex-col gap-3 outline-none" />
+        <ToastPrimitive.Viewport
+          label={`${regionLabel} ({hotkey})`}
+          className="fixed right-4 bottom-4 z-50 flex w-[min(92vw,24rem)] flex-col gap-3 outline-none"
+        />
       </ToastPrimitive.Provider>
     </ToastContext>
   );

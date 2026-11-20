@@ -6,7 +6,11 @@ import { Button, Card } from "@/components/ui";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("marketing");
-  return { title: { absolute: t("title") }, description: t("description"), robots: { index: true, follow: true } };
+  return {
+    title: { absolute: t("title") },
+    description: t("description"),
+    robots: { index: true, follow: true },
+  };
 }
 
 export default async function LandingPage() {
@@ -23,11 +27,13 @@ export default async function LandingPage() {
         }
       />
       <main id="inhoud" className="flex-1">
-        <section className="paper border-b border-sand">
+        <section className="paper border-sand border-b">
           <div className="mx-auto max-w-5xl px-5 py-20 sm:py-28">
-            <p className="text-sm font-medium tracking-widest text-taupe-dark uppercase">{common("tagline")}</p>
+            <p className="text-taupe-dark text-sm font-medium tracking-widest uppercase">
+              {common("tagline")}
+            </p>
             <h1 className="mt-5 max-w-3xl text-4xl sm:text-6xl">{t("heading")}</h1>
-            <p className="mt-6 text-xl text-taupe-dark">{t("lead")}</p>
+            <p className="text-taupe-dark mt-6 text-xl">{t("lead")}</p>
             <div className="mt-10 flex flex-wrap gap-4">
               <Button asChild size="lg">
                 <Link href="/inloggen">{t("cta")}</Link>
@@ -48,7 +54,7 @@ export default async function LandingPage() {
               <li key={key}>
                 <Card className="h-full">
                   <h3 className="text-2xl">{t(`pillars.${key}.title`)}</h3>
-                  <p className="mt-3 text-taupe-dark">{t(`pillars.${key}.body`)}</p>
+                  <p className="text-taupe-dark mt-3">{t(`pillars.${key}.body`)}</p>
                 </Card>
               </li>
             ))}
@@ -60,11 +66,13 @@ export default async function LandingPage() {
             <h2 id="wat-we-niet-doen" className="text-3xl">
               {t("trust.heading")}
             </h2>
-            <p className="mt-4 text-lg text-ink">{t("trust.body")}</p>
+            <p className="text-ink mt-4 text-lg">{t("trust.body")}</p>
           </div>
         </section>
       </main>
-      <footer className="mx-auto w-full max-w-5xl px-5 py-8 text-sm text-taupe-dark">{t("footer")}</footer>
+      <footer className="text-taupe-dark mx-auto w-full max-w-5xl px-5 py-8 text-sm">
+        {t("footer")}
+      </footer>
     </>
   );
 }

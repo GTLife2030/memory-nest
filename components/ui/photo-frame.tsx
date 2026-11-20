@@ -11,26 +11,32 @@ type PhotoFrameProps = {
   className?: string;
 };
 
-export function PhotoFrame({ children, caption, badge, tilt = "none", className }: PhotoFrameProps) {
+export function PhotoFrame({
+  children,
+  caption,
+  badge,
+  tilt = "none",
+  className,
+}: PhotoFrameProps) {
   return (
     <figure
       className={cn(
-        "inline-block bg-white p-3 pb-4 shadow-lift",
+        "shadow-lift inline-block bg-white p-3 pb-4",
         tilt === "left" && "-rotate-1",
         tilt === "right" && "rotate-1",
         className,
       )}
     >
-      <div className="relative overflow-hidden bg-sand">
+      <div className="bg-sand relative overflow-hidden">
         {children}
         {badge ? (
-          <span className="absolute bottom-2 left-2 rounded-pill bg-ink px-3 py-0.5 text-sm text-white">
+          <span className="rounded-pill bg-ink absolute bottom-2 left-2 px-3 py-0.5 text-sm text-white">
             {badge}
           </span>
         ) : null}
       </div>
       {caption ? (
-        <figcaption className="pt-3 text-center font-book text-base text-taupe-dark italic">
+        <figcaption className="font-book text-taupe-dark pt-3 text-center text-base italic">
           {caption}
         </figcaption>
       ) : null}

@@ -4,7 +4,10 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { Button, EmptyState } from "@/components/ui";
 
 export default async function NotFound() {
-  const [t, common] = await Promise.all([getTranslations("errors.notFound"), getTranslations("common")]);
+  const [t, common] = await Promise.all([
+    getTranslations("errors.notFound"),
+    getTranslations("common"),
+  ]);
   return (
     <>
       <SiteHeader />

@@ -16,7 +16,8 @@ export async function expectNoA11yViolations(page: Page) {
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-practice"])
     .analyze();
   const summary = results.violations.map(
-    (violation) => `${violation.id} (${violation.impact}): ${violation.help}\n  ${violation.nodes.map((node) => node.target.join(" ")).join("\n  ")}`,
+    (violation) =>
+      `${violation.id} (${violation.impact}): ${violation.help}\n  ${violation.nodes.map((node) => node.target.join(" ")).join("\n  ")}`,
   );
   expect(summary, summary.join("\n\n")).toEqual([]);
 }

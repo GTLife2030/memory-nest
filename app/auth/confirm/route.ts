@@ -6,7 +6,14 @@ import { safeNextPath } from "@/lib/safe-redirect";
 import { logger } from "@/lib/server/logger";
 import { createClient } from "@/lib/supabase/server";
 
-const otpTypes: EmailOtpType[] = ["magiclink", "email", "signup", "invite", "recovery", "email_change"];
+const otpTypes: EmailOtpType[] = [
+  "magiclink",
+  "email",
+  "signup",
+  "invite",
+  "recovery",
+  "email_change",
+];
 
 /**
  * Landing point of the magic link. Supports both link styles:

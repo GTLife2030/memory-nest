@@ -39,7 +39,8 @@ export async function proxy(request: NextRequest) {
           setAll: (toSet) => {
             for (const { name, value } of toSet) request.cookies.set(name, value);
             response = NextResponse.next({ request: { headers: requestHeaders } });
-            for (const { name, value, options } of toSet) response.cookies.set(name, value, options);
+            for (const { name, value, options } of toSet)
+              response.cookies.set(name, value, options);
           },
         },
       },
@@ -63,7 +64,8 @@ export const config = {
   matcher: [
     // Everything except static assets, the service worker and prefetches.
     {
-      source: "/((?!api/health|_next/static|_next/image|icons/|sw.js|favicon.ico|.*\\.(?:svg|png|jpg|webp|woff2)$).*)",
+      source:
+        "/((?!api/health|_next/static|_next/image|icons/|sw.js|favicon.ico|.*\\.(?:svg|png|jpg|webp|woff2)$).*)",
       missing: [{ type: "header", key: "next-router-prefetch" }],
     },
   ],

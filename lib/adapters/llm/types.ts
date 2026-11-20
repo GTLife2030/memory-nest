@@ -30,7 +30,13 @@ export type PhotoDescription = {
 };
 
 export interface LlmAdapter {
-  editStory(ctx: AiContext, input: { segments: TranscriptSegment[]; tellerName: string }): Promise<Costed<EditedStory>>;
-  followUps(ctx: AiContext, input: { storyText: string }): Promise<Costed<{ questions: [string, string] }>>;
+  editStory(
+    ctx: AiContext,
+    input: { segments: TranscriptSegment[]; tellerName: string },
+  ): Promise<Costed<EditedStory>>;
+  followUps(
+    ctx: AiContext,
+    input: { storyText: string },
+  ): Promise<Costed<{ questions: [string, string] }>>;
   describePhoto(ctx: AiContext, input: { imageUrl: string }): Promise<Costed<PhotoDescription>>;
 }

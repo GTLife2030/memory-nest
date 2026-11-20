@@ -9,19 +9,30 @@ import { logger } from "@/lib/server/logger";
 import { rateLimit } from "@/lib/server/rate-limit";
 import { createClient } from "@/lib/supabase/server";
 
-export type SignInState = { error: "invalidEmail" | "rateLimited" | "generic" | null; email: string };
+export type SignInState = {
+  error: "invalidEmail" | "rateLimited" | "generic" | null;
+  email: string;
+};
 
 const emailSchema = z.email().max(254);
 const FIFTEEN_MINUTES = 15 * 60 * 1000;
 
-export async function requestMagicLink(_previous: SignInState, formData: FormData): Promise<SignInState> {
-  const raw = String(formData.get("email") ?? "").trim().toLowerCase();
+export async function requestMagicLink(
+  _previous: SignInState,
+  formData: FormData,
+): Promise<SignInState> {
+  const raw = String(formData.get("email") ?? "")
+    .trim()
+    .toLowerCase();
   const parsed = emailSchema.safeParse(raw);
   if (!parsed.success) return { error: "invalidEmail", email: raw };
   const email = parsed.data;
 
   const forwarded = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-  if (!rateLimit(`ip:${forwarded}`, 10, FIFTEEN_MINUTES) || !rateLimit(`mail:${email}`, 3, FIFTEEN_MINUTES)) {
+  if (
+    !rateLimit(`ip:${forwarded}`, 10, FIFTEEN_MINUTES) ||
+    !rateLimit(`mail:${email}`, 3, FIFTEEN_MINUTES)
+  ) {
     return { error: "rateLimited", email };
   }
   if (!supabaseConfigured) return { error: "generic", email };

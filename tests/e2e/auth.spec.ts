@@ -8,13 +8,18 @@ import { hasSupabase } from "./helpers";
  * The link is generated through the admin API so no mailbox is needed.
  */
 const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-test.skip(!hasSupabase || !serviceKey, "needs NEXT_PUBLIC_SUPABASE_URL, anon key and SUPABASE_SERVICE_ROLE_KEY");
+test.skip(
+  !hasSupabase || !serviceKey,
+  "needs NEXT_PUBLIC_SUPABASE_URL, anon key and SUPABASE_SERVICE_ROLE_KEY",
+);
 test.describe.configure({ mode: "serial" });
 
 const stamp = Date.now();
 const emails = { truus: `e2e-truus-${stamp}@example.test`, eva: `e2e-eva-${stamp}@example.test` };
 const admin = () =>
-  createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, serviceKey!, { auth: { persistSession: false } });
+  createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, serviceKey!, {
+    auth: { persistSession: false },
+  });
 
 async function magicLinkPath(email: string): Promise<string> {
   const { data, error } = await admin().auth.admin.generateLink({ type: "magiclink", email });
@@ -27,7 +32,10 @@ test.afterAll(async () => {
   const { data } = await client.auth.admin.listUsers({ perPage: 200 });
   for (const user of data?.users ?? []) {
     if (Object.values(emails).includes(user.email ?? "")) {
-      const { data: owned } = await client.from("memberships").select("family_id").eq("user_id", user.id);
+      const { data: owned } = await client
+        .from("memberships")
+        .select("family_id")
+        .eq("user_id", user.id);
       for (const row of owned ?? []) await client.from("families").delete().eq("id", row.family_id);
       await client.auth.admin.deleteUser(user.id);
     }

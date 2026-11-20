@@ -37,7 +37,8 @@ export const createMockLlm = (): LlmAdapter => ({
   },
   async describePhoto() {
     return {
-      description: "Een zwart-witfoto van een winkelpand met een etalage, twee mensen staan voor de deur.",
+      description:
+        "Een zwart-witfoto van een winkelpand met een etalage, twee mensen staan voor de deur.",
       decadeGuess: "vermoedelijk jaren vijftig",
       question: "Vertel eens over de dag dat deze foto is gemaakt.",
       costCents: 0,

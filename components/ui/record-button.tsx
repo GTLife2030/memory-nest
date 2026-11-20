@@ -17,7 +17,14 @@ type RecordButtonProps = {
 };
 
 /** The one big button. No timer pressure, no countdown: recording has no time-out. */
-export function RecordButton({ state, onToggle, labels, elapsed, disabled, className }: RecordButtonProps) {
+export function RecordButton({
+  state,
+  onToggle,
+  labels,
+  elapsed,
+  disabled,
+  className,
+}: RecordButtonProps) {
   const recording = state === "recording";
   return (
     <div className={cn("flex flex-col items-center gap-4", className)}>
@@ -27,22 +34,25 @@ export function RecordButton({ state, onToggle, labels, elapsed, disabled, class
         disabled={disabled}
         aria-pressed={recording}
         className={cn(
-          "relative flex size-28 items-center justify-center rounded-pill text-white shadow-lift transition-colors duration-200 ease-out disabled:opacity-60",
+          "rounded-pill shadow-lift relative flex size-28 items-center justify-center text-white transition-colors duration-200 ease-out disabled:opacity-60",
           recording ? "bg-ink" : "bg-terracotta-dark hover:bg-ink",
         )}
       >
         {recording ? (
-          <span aria-hidden="true" className="absolute inset-0 animate-ring rounded-pill bg-terracotta" />
+          <span
+            aria-hidden="true"
+            className="animate-ring rounded-pill bg-terracotta absolute inset-0"
+          />
         ) : null}
         <span aria-hidden="true" className="relative">
           {recording ? <Pause className="size-10" /> : <Mic className="size-10" />}
         </span>
         <span className="sr-only">{labels[state]}</span>
       </button>
-      <p aria-hidden="true" className="text-lg font-medium text-ink">
+      <p aria-hidden="true" className="text-ink text-lg font-medium">
         {labels[state]}
       </p>
-      <p role="timer" aria-live="off" className="min-h-[1.6em] text-taupe-dark tabular-nums">
+      <p role="timer" aria-live="off" className="text-taupe-dark min-h-[1.6em] tabular-nums">
         {elapsed}
       </p>
     </div>

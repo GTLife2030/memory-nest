@@ -35,10 +35,10 @@ export function Dialog({
     <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
       {trigger ? <DialogPrimitive.Trigger asChild>{trigger}</DialogPrimitive.Trigger> : null}
       <DialogPrimitive.Portal>
-        <DialogPrimitive.Overlay className="fixed inset-0 z-40 bg-ink/50" />
+        <DialogPrimitive.Overlay className="bg-ink/50 fixed inset-0 z-40" />
         <DialogPrimitive.Content
           className={cn(
-            "fixed top-1/2 left-1/2 z-50 max-h-[90dvh] w-[min(92vw,34rem)] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-card bg-linen p-8 shadow-lift",
+            "rounded-card bg-linen shadow-lift fixed top-1/2 left-1/2 z-50 max-h-[90dvh] w-[min(92vw,34rem)] -translate-x-1/2 -translate-y-1/2 overflow-y-auto p-8",
             className,
           )}
         >
@@ -50,7 +50,7 @@ export function Dialog({
               </IconButton>
             </DialogPrimitive.Close>
           </div>
-          <DialogPrimitive.Description className="mt-3 text-taupe-dark">
+          <DialogPrimitive.Description className="text-taupe-dark mt-3">
             {description}
           </DialogPrimitive.Description>
           {children ? <div className="mt-6">{children}</div> : null}

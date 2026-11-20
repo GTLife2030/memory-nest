@@ -24,9 +24,15 @@ alter default privileges in schema storage grant all on tables to anon, authenti
 
 create table auth.users (
   id uuid primary key default gen_random_uuid(),
+  instance_id uuid,
+  aud text,
+  role text,
   email text unique,
+  email_confirmed_at timestamptz,
+  raw_app_meta_data jsonb not null default '{}',
   raw_user_meta_data jsonb not null default '{}',
-  created_at timestamptz not null default now()
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
 );
 
 create function auth.jwt() returns jsonb language sql stable as $$

@@ -32,7 +32,11 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const [locale, cookieStore, t] = await Promise.all([getLocale(), cookies(), getTranslations("common")]);
+  const [locale, cookieStore, t] = await Promise.all([
+    getLocale(),
+    cookies(),
+    getTranslations("common"),
+  ]);
   const elder = cookieStore.get(ELDER_COOKIE)?.value === "1";
 
   return (
@@ -40,7 +44,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-dvh flex-col antialiased">
         <a
           href="#inhoud"
-          className="sr-only rounded-pill bg-ink px-5 py-3 text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50"
+          className="rounded-pill bg-ink sr-only px-5 py-3 text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50"
         >
           {t("skipToContent")}
         </a>

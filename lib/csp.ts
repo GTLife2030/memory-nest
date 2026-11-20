@@ -9,7 +9,12 @@ export function buildCsp({ nonce, supabaseUrl, dev }: CspInput): string {
   const supabaseWs = supabase.replace(/^http/, "ws");
   const directives: Record<string, string[]> = {
     "default-src": ["'self'"],
-    "script-src": ["'self'", `'nonce-${nonce}'`, "'strict-dynamic'", ...(dev ? ["'unsafe-eval'"] : [])],
+    "script-src": [
+      "'self'",
+      `'nonce-${nonce}'`,
+      "'strict-dynamic'",
+      ...(dev ? ["'unsafe-eval'"] : []),
+    ],
     "style-src": ["'self'", "'unsafe-inline'"],
     "img-src": ["'self'", "blob:", "data:", supabase],
     "media-src": ["'self'", "blob:", supabase],

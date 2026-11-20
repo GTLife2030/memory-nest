@@ -3,8 +3,10 @@ import { cn } from "@/lib/cn";
 /** Wordmark with a small nest mark. `label` is the brand name from the messages file. */
 export function Logo({ label, className }: { label: string; className?: string }) {
   return (
-    <span className={cn("inline-flex items-center gap-2.5 font-heading text-xl text-ink", className)}>
-      <svg aria-hidden="true" viewBox="0 0 32 32" className="size-8 text-terracotta-dark">
+    <span
+      className={cn("font-heading text-ink inline-flex items-center gap-2.5 text-xl", className)}
+    >
+      <svg aria-hidden="true" viewBox="0 0 32 32" className="text-terracotta-dark size-8">
         <path
           d="M4 17c0 6.1 5.4 10 12 10s12-3.9 12-10"
           fill="none"

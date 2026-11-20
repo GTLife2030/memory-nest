@@ -33,9 +33,9 @@ export function LoginForm({ next }: { next: string }) {
           defaultValue={state.email}
           aria-describedby={state.error ? "email-hint email-error" : "email-hint"}
           aria-invalid={state.error === "invalidEmail" ? true : undefined}
-          className="min-target rounded-card border border-taupe bg-white px-4 py-3 text-lg text-ink"
+          className="min-target rounded-card border-taupe text-ink border bg-white px-4 py-3 text-lg"
         />
-        <p id="email-error" role="alert" className="min-h-[1.6em] font-medium text-error">
+        <p id="email-error" role="alert" className="text-error min-h-[1.6em] font-medium">
           {state.error ? t(`errors.${state.error}`) : null}
         </p>
       </div>

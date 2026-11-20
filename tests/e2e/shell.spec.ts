@@ -4,7 +4,9 @@ import { hasSupabase } from "./helpers";
 test("landing page carries the core promise in Dutch", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("lang", "nl");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Je hoeft niets te schrijven. Vertel het gewoon.");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Je hoeft niets te schrijven. Vertel het gewoon.",
+  );
   await expect(page.getByRole("link", { name: "Begin je nest" })).toBeVisible();
 });
 
@@ -24,13 +26,19 @@ test("elder mode enlarges type and survives navigation", async ({ page }) => {
   await page.getByRole("button", { name: "Grote letters aan" }).click();
   await expect(page.locator("html")).toHaveAttribute("data-elder", "true");
   expect(await rootSize()).toBe("21px");
-  await expect(page.getByRole("button", { name: "Grote letters uit" })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("button", { name: "Grote letters uit" })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
 
   await page.goto("/design");
   expect(await rootSize()).toBe("21px");
 });
 
-test("keyboard: skip link comes first and the dialog traps and returns focus", async ({ page, isMobile }) => {
+test("keyboard: skip link comes first and the dialog traps and returns focus", async ({
+  page,
+  isMobile,
+}) => {
   test.skip(isMobile, "hardware keyboard flow");
   await page.goto("/design");
   await page.keyboard.press("Tab");
@@ -64,7 +72,10 @@ test("the record button moves through its states without a time limit", async ({
   const record = page.getByRole("button", { name: "Tik om te vertellen" });
   await expect(record).toHaveAttribute("aria-pressed", "false");
   await record.click();
-  await expect(page.getByRole("button", { name: /Ik luister/ })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("button", { name: /Ik luister/ })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
   await page.getByRole("button", { name: /Ik luister/ }).click();
   await expect(page.getByRole("button", { name: /Gepauzeerd/ })).toBeVisible();
 });
@@ -116,7 +127,10 @@ test("the app is installable: manifest, icons and service worker", async ({ page
   expect(active).toBe(true);
 });
 
-test("offline: a page that cannot load falls back to the offline screen", async ({ page, context }) => {
+test("offline: a page that cannot load falls back to the offline screen", async ({
+  page,
+  context,
+}) => {
   await page.goto("/");
   await page.evaluate(() => navigator.serviceWorker.ready);
   await page.reload(); // now controlled by the service worker

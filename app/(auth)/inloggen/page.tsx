@@ -20,7 +20,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/inloggen">
     return (
       <Card className="p-8">
         <h1 className="text-3xl">{t("notConfigured.heading")}</h1>
-        <p className="mt-4 text-taupe-dark">{t("notConfigured.body")}</p>
+        <p className="text-taupe-dark mt-4">{t("notConfigured.body")}</p>
         <Button asChild size="lg" className="mt-8">
           <Link href="/nest/demo">{t("notConfigured.cta")}</Link>
         </Button>
@@ -31,9 +31,12 @@ export default async function LoginPage({ searchParams }: PageProps<"/inloggen">
   return (
     <Card className="p-8">
       <h1 className="text-3xl">{t("heading")}</h1>
-      <p className="mt-4 text-taupe-dark">{t("lead")}</p>
+      <p className="text-taupe-dark mt-4">{t("lead")}</p>
       {linkFailed ? (
-        <p role="alert" className="mt-6 rounded-card border border-error bg-cream p-4 font-medium text-error">
+        <p
+          role="alert"
+          className="rounded-card border-error bg-cream text-error mt-6 border p-4 font-medium"
+        >
           {t("errors.linkExpired")}
         </p>
       ) : null}

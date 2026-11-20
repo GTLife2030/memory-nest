@@ -30,11 +30,11 @@ export function ProgressGentle({ done, total, label, className }: ProgressGentle
           <span
             key={index}
             aria-hidden="true"
-            className={cn("h-2 flex-1 rounded-pill", index < value ? "bg-taupe-dark" : "bg-sand")}
+            className={cn("rounded-pill h-2 flex-1", index < value ? "bg-taupe-dark" : "bg-sand")}
           />
         ))}
       </div>
-      <p className="text-sm text-taupe-dark">{label}</p>
+      <p className="text-taupe-dark text-sm">{label}</p>
     </div>
   );
 }

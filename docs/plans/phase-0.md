@@ -10,13 +10,13 @@ and the test and CI rails. No product features yet.
 
 Acceptance (from the plan van aanpak, B2):
 
-| # | Criterion | How it is proven |
-|---|-----------|------------------|
-| A1 | Sign in with a magic link and land in your own nest | Playwright E2E against a real Supabase project (see decision D2) |
-| A2 | RLS tests green, including cross-family isolation | SQL test suite, one test file per rule in "RLS principles" |
-| A3 | Lighthouse accessibility ≥ 95, axe clean | Lighthouse CI + `@axe-core/playwright` on every route, normal and elder mode |
-| A4 | App runs with only Supabase configured | All 10 adapters resolve to mocks, "demo-modus" badge visible |
-| A5 | Lint, typecheck and tests run on every commit and in CI | Pre-commit hook + GitHub Actions workflow |
+| #   | Criterion                                               | How it is proven                                                             |
+| --- | ------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| A1  | Sign in with a magic link and land in your own nest     | Playwright E2E against a real Supabase project (see decision D2)             |
+| A2  | RLS tests green, including cross-family isolation       | SQL test suite, one test file per rule in "RLS principles"                   |
+| A3  | Lighthouse accessibility ≥ 95, axe clean                | Lighthouse CI + `@axe-core/playwright` on every route, normal and elder mode |
+| A4  | App runs with only Supabase configured                  | All 10 adapters resolve to mocks, "demo-modus" badge visible                 |
+| A5  | Lint, typecheck and tests run on every commit and in CI | Pre-commit hook + GitHub Actions workflow                                    |
 
 ## 2. What I found in this environment
 
@@ -58,7 +58,7 @@ These facts shape the plan and three of them need a decision from you (section 7
    sealed capsules unreadable by recipients, legacy contact cannot read private stories,
    cross-family isolation on every family-scoped table, storage bucket policies.
 8. **Adapters** — interface + mock + registry for all ten (`llm, voice, stt, storage, video,
-   print, payments, email, whatsapp, telephony`). Mocks return realistic Dutch data. Real
+print, payments, email, whatsapp, telephony`). Mocks return realistic Dutch data. Real
    implementations arrive in the phase that needs them. The registry is the single place that
    decides mock vs real from env, and feeds the "demo-modus" badge.
 9. **Vault guard** — enforced twice: in the database (section 5) and in the adapter registry
@@ -85,17 +85,17 @@ empty nest home, `/design` gallery, offline fallback.
 
 ## 4. Build order
 
-| Step | Work | Done when |
-|------|------|-----------|
-| 1 | Scaffold, tooling, CLAUDE.md, skills, agents, pre-commit hook | `pnpm lint && pnpm typecheck && pnpm test` green on an empty app |
-| 2 | Tokens, fonts, elder mode, components, `/design` gallery | Vitest component tests + axe clean on `/design` in both modes |
-| 3 | i18n and the marketing/auth/app route shells | No hard-coded strings; lint rule proves it |
-| 4 | Migrations for the full schema | Applies cleanly from zero, twice (idempotent reset) |
-| 5 | RLS policies + SQL tests, written test-first per rule | Every rule has a failing-then-passing test |
-| 6 | Auth flow, first-sign-in bootstrap, protected layout | E2E: sign in → own empty nest; cannot open another family's URL |
-| 7 | Adapter interfaces, mocks, registry, demo badge, vault guard | Unit tests per adapter; badge shows which services are mocked |
-| 8 | PWA shell, worker skeleton, observability hooks, security headers | Lighthouse PWA installable; worker pytest green |
-| 9 | CI workflow, docs, ADRs, `/security-review`, rls-reviewer pass | Phase report |
+| Step | Work                                                              | Done when                                                        |
+| ---- | ----------------------------------------------------------------- | ---------------------------------------------------------------- |
+| 1    | Scaffold, tooling, CLAUDE.md, skills, agents, pre-commit hook     | `pnpm lint && pnpm typecheck && pnpm test` green on an empty app |
+| 2    | Tokens, fonts, elder mode, components, `/design` gallery          | Vitest component tests + axe clean on `/design` in both modes    |
+| 3    | i18n and the marketing/auth/app route shells                      | No hard-coded strings; lint rule proves it                       |
+| 4    | Migrations for the full schema                                    | Applies cleanly from zero, twice (idempotent reset)              |
+| 5    | RLS policies + SQL tests, written test-first per rule             | Every rule has a failing-then-passing test                       |
+| 6    | Auth flow, first-sign-in bootstrap, protected layout              | E2E: sign in → own empty nest; cannot open another family's URL  |
+| 7    | Adapter interfaces, mocks, registry, demo badge, vault guard      | Unit tests per adapter; badge shows which services are mocked    |
+| 8    | PWA shell, worker skeleton, observability hooks, security headers | Lighthouse PWA installable; worker pytest green                  |
+| 9    | CI workflow, docs, ADRs, `/security-review`, rls-reviewer pass    | Phase report                                                     |
 
 ## 5. Design decisions worth your attention
 
@@ -122,13 +122,13 @@ size to 21px and the minimum target size to 56px through tokens, so components n
 
 ## 6. Deviations from the build prompt (each gets an ADR)
 
-| # | Deviation | Why |
-|---|-----------|-----|
-| ADR-001 | Tailwind v4, tokens in CSS `@theme` rather than `tailwind.config` | Current stable; the tokens are CSS variables either way |
+| #       | Deviation                                                                                                                                          | Why                                                                                                       |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| ADR-001 | Tailwind v4, tokens in CSS `@theme` rather than `tailwind.config`                                                                                  | Current stable; the tokens are CSS variables either way                                                   |
 | ADR-002 | RLS tests run against plain PostgreSQL 16 with a small shim (`auth.uid()`, the `anon` / `authenticated` / `service_role` roles, `storage.objects`) | No Docker here, so no local Supabase stack. The same test files run unchanged against real Supabase in CI |
-| ADR-003 | Migrations as files via the Supabase CLI instead of the Supabase MCP server | MCP is not available in this session; files remain the source of truth, as CLAUDE.md requires anyway |
-| ADR-004 | Pre-commit runs lint, typecheck and unit tests; RLS and Playwright run pre-push and in CI | Keeps a commit under ~20 s so the hook does not get bypassed |
-| ADR-005 | pgTAP if the extension can be installed, otherwise plain SQL assertions with a small runner | Depends on what the Postgres here and on Supabase allow; decided in step 5 |
+| ADR-003 | Migrations as files via the Supabase CLI instead of the Supabase MCP server                                                                        | MCP is not available in this session; files remain the source of truth, as CLAUDE.md requires anyway      |
+| ADR-004 | Pre-commit runs lint, typecheck and unit tests; RLS and Playwright run pre-push and in CI                                                          | Keeps a commit under ~20 s so the hook does not get bypassed                                              |
+| ADR-005 | pgTAP if the extension can be installed, otherwise plain SQL assertions with a small runner                                                        | Depends on what the Postgres here and on Supabase allow; decided in step 5                                |
 
 ## 7. Decisions I need from you
 
@@ -153,13 +153,13 @@ per storyteller for Nestje from phase 2.
 
 ## 8. Risks in this phase
 
-| Risk | Mitigation |
-|------|------------|
-| The auth shim differs from real Supabase, so an RLS test passes locally and fails for real | Same SQL files run against the real project in CI; phase 0 is not reported done on shim results alone if D2 is available |
-| The full schema is designed before the features exist and needs changes | Expected; migrations are additive and every later phase starts with a schema review. The RLS helpers, not the columns, are the part that must be right now |
-| Worker Docker image cannot be built here | Worker tests run natively here; the image build runs in CI |
-| iOS web push and install behaviour cannot be tested here | Only the shell is in scope; real-device testing is listed for phase 1 |
-| Fraunces at 21px breaks layouts | Every component is tested in the gallery in both modes at 360px width |
+| Risk                                                                                       | Mitigation                                                                                                                                                 |
+| ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The auth shim differs from real Supabase, so an RLS test passes locally and fails for real | Same SQL files run against the real project in CI; phase 0 is not reported done on shim results alone if D2 is available                                   |
+| The full schema is designed before the features exist and needs changes                    | Expected; migrations are additive and every later phase starts with a schema review. The RLS helpers, not the columns, are the part that must be right now |
+| Worker Docker image cannot be built here                                                   | Worker tests run natively here; the image build runs in CI                                                                                                 |
+| iOS web push and install behaviour cannot be tested here                                   | Only the shell is in scope; real-device testing is listed for phase 1                                                                                      |
+| Fraunces at 21px breaks layouts                                                            | Every component is tested in the gallery in both modes at 360px width                                                                                      |
 
 ## 9. Checkpoint deliverables
 

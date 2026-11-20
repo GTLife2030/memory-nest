@@ -17,8 +17,10 @@ export default async function LinkSentPage({ searchParams }: PageProps<"/inlogge
   return (
     <Card className="p-8">
       <h1 className="text-3xl">{t("heading")}</h1>
-      <p className="mt-4 text-lg">{email.success ? t("body", { email: email.data }) : t("bodyNoEmail")}</p>
-      <p className="mt-4 text-taupe-dark">{t("spam")}</p>
+      <p className="mt-4 text-lg">
+        {email.success ? t("body", { email: email.data }) : t("bodyNoEmail")}
+      </p>
+      <p className="text-taupe-dark mt-4">{t("spam")}</p>
       <Button asChild variant="secondary" className="mt-8">
         <Link href="/inloggen">{t("again")}</Link>
       </Button>

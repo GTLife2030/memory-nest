@@ -185,7 +185,8 @@
       "meta": "Oma Truus · jaren vijftig",
       "excerpt": "Mijn vader had een bakkerij aan de Heuvel in Tilburg. Om vier uur 's ochtends stond hij al op, en dan rook het hele huis naar vers brood.",
       "draftTitle": "Verkering op de kermis",
-      "draftMeta": "Oma Truus · 1966"
+      "draftMeta": "Oma Truus · 1966",
+      "draftStatus": "Nog nalezen"
     },
     "question": {
       "text": "Hoe rook het bij jullie thuis op zondag?",
@@ -203,9 +204,19 @@
       "badge": "bewerkt met AI"
     },
     "timeline": {
-      "one": { "date": "1946", "title": "Geboren in Tilburg" },
-      "two": { "date": "Jaren vijftig", "title": "De bakkerij van mijn vader", "body": "Elke zaterdag krentenbollen tellen." },
-      "three": { "date": "14 maart 2026", "title": "Saar is geboren" }
+      "one": {
+        "date": "1946",
+        "title": "Geboren in Tilburg"
+      },
+      "two": {
+        "date": "Jaren vijftig",
+        "title": "De bakkerij van mijn vader",
+        "body": "Elke zaterdag krentenbollen tellen."
+      },
+      "three": {
+        "date": "14 maart 2026",
+        "title": "Saar is geboren"
+      }
     },
     "progress": {
       "label": "3 van de 8 verhalen staan in het boek"

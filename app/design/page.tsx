@@ -2,7 +2,16 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 import { SiteHeader } from "@/components/layout/site-header";
-import { Button, Card, EmptyState, PhotoFrame, ProgressGentle, QuestionCard, StoryCard, TimelineItem } from "@/components/ui";
+import {
+  Button,
+  Card,
+  EmptyState,
+  PhotoFrame,
+  ProgressGentle,
+  QuestionCard,
+  StoryCard,
+  TimelineItem,
+} from "@/components/ui";
 import { colors } from "@/lib/design/tokens";
 import { FeedbackDemo, RecordDemo } from "./interactive";
 
@@ -28,7 +37,7 @@ const swatches: { name: keyof typeof colors; className: string }[] = [
 
 function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
   return (
-    <section aria-labelledby={id} className="border-t border-sand py-12">
+    <section aria-labelledby={id} className="border-sand border-t py-12">
       <h2 id={id} className="text-3xl">
         {title}
       </h2>
@@ -45,15 +54,15 @@ export default async function DesignPage() {
       <SiteHeader />
       <main id="inhoud" className="mx-auto w-full max-w-5xl flex-1 px-5 py-12">
         <h1 className="text-4xl sm:text-5xl">{t("heading")}</h1>
-        <p className="mt-4 mb-12 text-xl text-taupe-dark">{t("lead")}</p>
+        <p className="text-taupe-dark mt-4 mb-12 text-xl">{t("lead")}</p>
 
         <Section id="kleuren" title={t("sections.colors")}>
           <ul className="grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6">
             {swatches.map(({ name, className }) => (
-              <li key={name} className="overflow-hidden rounded-card bg-linen shadow-soft">
+              <li key={name} className="rounded-card bg-linen shadow-soft overflow-hidden">
                 <div className={`h-20 ${className}`} />
                 <p className="px-3 pt-2 text-sm font-medium">{name}</p>
-                <p className="px-3 pb-3 text-sm text-taupe-dark">{colors[name]}</p>
+                <p className="text-taupe-dark px-3 pb-3 text-sm">{colors[name]}</p>
               </li>
             ))}
           </ul>
@@ -62,15 +71,15 @@ export default async function DesignPage() {
         <Section id="letters" title={t("sections.type")}>
           <div className="flex flex-col gap-8">
             <div>
-              <p className="text-sm text-taupe-dark">{t("type.headingLabel")}</p>
+              <p className="text-taupe-dark text-sm">{t("type.headingLabel")}</p>
               <p className="font-heading text-4xl">{t("type.heading")}</p>
             </div>
             <div>
-              <p className="text-sm text-taupe-dark">{t("type.bodyLabel")}</p>
+              <p className="text-taupe-dark text-sm">{t("type.bodyLabel")}</p>
               <p>{t("type.body")}</p>
             </div>
             <div>
-              <p className="text-sm text-taupe-dark">{t("type.bookLabel")}</p>
+              <p className="text-taupe-dark text-sm">{t("type.bookLabel")}</p>
               <p className="font-book text-xl">{t("type.book")}</p>
             </div>
           </div>
@@ -109,7 +118,7 @@ export default async function DesignPage() {
               href="#kaarten"
               meta={t("story.draftMeta")}
               excerpt={t("story.excerpt")}
-              statusLabel={t("buttons.disabled")}
+              statusLabel={t("story.draftStatus")}
               aiLabel={t("photo.badge")}
             />
           </div>
@@ -139,7 +148,12 @@ export default async function DesignPage() {
             <PhotoFrame caption={t("photo.caption")} tilt="left" className="w-64">
               <SepiaPlaceholder label={t("photo.alt")} />
             </PhotoFrame>
-            <PhotoFrame caption={t("photo.caption")} badge={t("photo.badge")} tilt="right" className="w-64">
+            <PhotoFrame
+              caption={t("photo.caption")}
+              badge={t("photo.badge")}
+              tilt="right"
+              className="w-64"
+            >
               <SepiaPlaceholder label={t("photo.alt")} />
             </PhotoFrame>
           </div>
@@ -147,11 +161,23 @@ export default async function DesignPage() {
 
         <Section id="tijdlijn" title={t("sections.timeline")}>
           <ol className="ml-2">
-            <TimelineItem dateLabel={t("timeline.one.date")} dateTime="1946" title={t("timeline.one.title")} />
-            <TimelineItem dateLabel={t("timeline.two.date")} title={t("timeline.two.title")} href="#tijdlijn">
+            <TimelineItem
+              dateLabel={t("timeline.one.date")}
+              dateTime="1946"
+              title={t("timeline.one.title")}
+            />
+            <TimelineItem
+              dateLabel={t("timeline.two.date")}
+              title={t("timeline.two.title")}
+              href="#tijdlijn"
+            >
               <p>{t("timeline.two.body")}</p>
             </TimelineItem>
-            <TimelineItem dateLabel={t("timeline.three.date")} dateTime="2026-03-14" title={t("timeline.three.title")} />
+            <TimelineItem
+              dateLabel={t("timeline.three.date")}
+              dateTime="2026-03-14"
+              title={t("timeline.three.title")}
+            />
           </ol>
         </Section>
 
@@ -165,7 +191,11 @@ export default async function DesignPage() {
 
         <Section id="leeg" title={t("sections.empty")}>
           <Card>
-            <EmptyState title={t("empty.title")} body={t("empty.body")} action={<Button>{t("empty.action")}</Button>} />
+            <EmptyState
+              title={t("empty.title")}
+              body={t("empty.body")}
+              action={<Button>{t("empty.action")}</Button>}
+            />
           </Card>
         </Section>
       </main>

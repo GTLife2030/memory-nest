@@ -49,15 +49,27 @@ type Definition<T> = {
 
 export const definitions: { [K in AdapterName]: Definition<Adapters[K]> } = {
   llm: { envKeys: ["ANTHROPIC_API_KEY"], ai: true, createMock: createMockLlm },
-  voice: { envKeys: ["ELEVENLABS_API_KEY", "ELEVENLABS_AGENT_ID"], ai: true, createMock: createMockVoice },
+  voice: {
+    envKeys: ["ELEVENLABS_API_KEY", "ELEVENLABS_AGENT_ID"],
+    ai: true,
+    createMock: createMockVoice,
+  },
   stt: { envKeys: ["ELEVENLABS_API_KEY"], ai: true, createMock: createMockStt },
-  storage: { envKeys: ["NEXT_PUBLIC_SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"], ai: false, createMock: createMockStorage },
+  storage: {
+    envKeys: ["NEXT_PUBLIC_SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"],
+    ai: false,
+    createMock: createMockStorage,
+  },
   video: { envKeys: ["MUX_TOKEN_ID", "MUX_TOKEN_SECRET"], ai: false, createMock: createMockVideo },
   print: { envKeys: ["PEECHO_API_KEY"], ai: false, createMock: createMockPrint },
   payments: { envKeys: ["MOLLIE_API_KEY"], ai: false, createMock: createMockPayments },
   email: { envKeys: ["POSTMARK_TOKEN"], ai: false, createMock: createMockEmail },
   whatsapp: { envKeys: ["WHATSAPP_TOKEN"], ai: false, createMock: createMockWhatsapp },
-  telephony: { envKeys: ["TWILIO_ACCOUNT_SID", "TWILIO_AUTH_TOKEN"], ai: true, createMock: createMockTelephony },
+  telephony: {
+    envKeys: ["TWILIO_ACCOUNT_SID", "TWILIO_AUTH_TOKEN"],
+    ai: true,
+    createMock: createMockTelephony,
+  },
 };
 
 type Env = (name: string) => string | undefined;
@@ -80,7 +92,12 @@ const isAiContext = (value: unknown): value is AiContext =>
  * the content comes from a vault story. This is the application half of the vault rule; the
  * database half is the guard_vault triggers.
  */
-export function instrument<T extends object>(name: AdapterName, adapter: T, ai: boolean, mocked: boolean): T {
+export function instrument<T extends object>(
+  name: AdapterName,
+  adapter: T,
+  ai: boolean,
+  mocked: boolean,
+): T {
   return new Proxy(adapter, {
     get(target, property, receiver) {
       const value = Reflect.get(target, property, receiver);
@@ -93,7 +110,11 @@ export function instrument<T extends object>(name: AdapterName, adapter: T, ai: 
             throw new Error(`${name}.${method} must be called with an AiContext as first argument`);
           }
           if (ctx.vault) {
-            logger.warn("adapter.vault_refused", { adapter: name, method, family_id: ctx.familyId });
+            logger.warn("adapter.vault_refused", {
+              adapter: name,
+              method,
+              family_id: ctx.familyId,
+            });
             throw new VaultViolationError(name, method);
           }
         }

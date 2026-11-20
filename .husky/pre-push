@@ -1,0 +1,6 @@
+# Slower suites that need local services; skipped with a clear message when those are missing.
+if pg_isready -q -h "${PGHOST:-127.0.0.1}" 2>/dev/null; then
+  pnpm test:db
+else
+  echo "pre-push: PostgreSQL is not running, skipping RLS tests (CI runs them)."
+fi

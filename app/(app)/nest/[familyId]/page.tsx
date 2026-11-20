@@ -5,7 +5,9 @@ import { Button, Card, EmptyState, QuestionCard, StoryCard, TimelineItem } from 
 import { demoFamily } from "@/lib/demo/de-wit";
 import { getNest } from "@/lib/server/nest";
 
-export async function generateMetadata({ params }: PageProps<"/nest/[familyId]">): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps<"/nest/[familyId]">): Promise<Metadata> {
   const [{ familyId }, t] = await Promise.all([params, getTranslations("nest")]);
   const nest = await getNest(familyId);
   return { title: nest ? t("title", { family: nest.familyName }) : undefined };
@@ -24,9 +26,11 @@ export default async function NestHomePage({ params }: PageProps<"/nest/[familyI
           {nest.displayName ? t("greeting", { name: nest.displayName }) : t("greetingAnonymous")}
         </p>
         <h1 className="mt-1 text-4xl sm:text-5xl">{t("title", { family: nest.familyName })}</h1>
-        <p className="mt-3 text-sm text-taupe-dark">{t("roleLabel", { role: t(`role.${nest.role}`) })}</p>
+        <p className="text-taupe-dark mt-3 text-sm">
+          {t("roleLabel", { role: t(`role.${nest.role}`) })}
+        </p>
         {nest.demo ? (
-          <p className="mt-4 inline-block rounded-card border border-taupe bg-linen px-4 py-2 text-taupe-dark">
+          <p className="rounded-card border-taupe bg-linen text-taupe-dark mt-4 inline-block border px-4 py-2">
             {t("demoNotice")}
           </p>
         ) : null}
@@ -46,7 +50,7 @@ export default async function NestHomePage({ params }: PageProps<"/nest/[familyI
                   <Button size="lg" disabled title={t("question.soon")}>
                     {t("question.tell")}
                   </Button>
-                  <p className="basis-full text-sm text-taupe-dark">{t("question.soon")}</p>
+                  <p className="text-taupe-dark basis-full text-sm">{t("question.soon")}</p>
                 </>
               }
             />
@@ -64,9 +68,13 @@ export default async function NestHomePage({ params }: PageProps<"/nest/[familyI
                     href="#verhalen"
                     meta={`${story.teller} · ${story.when}`}
                     excerpt={story.excerpt}
-                    statusLabel={story.status === "needs_review" ? t("story.needsReview") : undefined}
+                    statusLabel={
+                      story.status === "needs_review" ? t("story.needsReview") : undefined
+                    }
                     aiLabel={story.status === "needs_review" ? t("story.ai") : undefined}
-                    hasAudioLabel={story.status === "approved" ? t("story.approvedAudio") : undefined}
+                    hasAudioLabel={
+                      story.status === "approved" ? t("story.approvedAudio") : undefined
+                    }
                   />
                 </li>
               ))}
@@ -95,9 +103,11 @@ export default async function NestHomePage({ params }: PageProps<"/nest/[familyI
               </h2>
               <Card className="mt-6">
                 <h3 className="text-xl">{demoFamily.capsule.title}</h3>
-                <p className="mt-2 text-taupe-dark">
+                <p className="text-taupe-dark mt-2">
                   {t("capsule.sealed", {
-                    date: format.dateTime(new Date(demoFamily.capsule.releaseDate), { dateStyle: "long" }),
+                    date: format.dateTime(new Date(demoFamily.capsule.releaseDate), {
+                      dateStyle: "long",
+                    }),
                   })}
                 </p>
               </Card>
@@ -106,7 +116,11 @@ export default async function NestHomePage({ params }: PageProps<"/nest/[familyI
         </>
       ) : (
         <Card>
-          <EmptyState title={t("empty.title")} body={t("empty.body")} illustration={<EmptyNest />} />
+          <EmptyState
+            title={t("empty.title")}
+            body={t("empty.body")}
+            illustration={<EmptyNest />}
+          />
         </Card>
       )}
     </div>
@@ -115,7 +129,13 @@ export default async function NestHomePage({ params }: PageProps<"/nest/[familyI
 
 function EmptyNest() {
   return (
-    <svg viewBox="0 0 120 80" className="h-24 w-36" fill="none" stroke="currentColor" strokeLinecap="round">
+    <svg
+      viewBox="0 0 120 80"
+      className="h-24 w-36"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+    >
       <path d="M12 38c0 20 21 32 48 32s48-12 48-32" strokeWidth="3" />
       <path d="M22 42c6 12 20 19 38 19s32-7 38-19" strokeWidth="2" opacity="0.6" />
       <path d="M32 44c5 7 15 11 28 11s23-4 28-11" strokeWidth="2" opacity="0.35" />

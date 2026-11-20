@@ -1,5 +1,10 @@
 import { expect, test } from "@playwright/test";
-import { expectNoA11yViolations, expectNoHorizontalScroll, hasSupabase, setElderMode } from "./helpers";
+import {
+  expectNoA11yViolations,
+  expectNoHorizontalScroll,
+  hasSupabase,
+  setElderMode,
+} from "./helpers";
 
 // Every screen of phase 0, in normal and in elder mode.
 const routes = [
@@ -38,12 +43,19 @@ for (const elder of [false, true]) {
     test("interactive targets are large enough", async ({ page }) => {
       await page.goto("/design");
       const minimum = elder ? 56 : 44;
-      const sizes = await page.locator("main button, main a[class*='rounded-pill'], header button").evaluateAll((nodes) =>
-        nodes.map((node) => ({ text: node.textContent?.trim().slice(0, 30), height: node.getBoundingClientRect().height })),
-      );
+      const sizes = await page
+        .locator("main button, main a[class*='rounded-pill'], header button")
+        .evaluateAll((nodes) =>
+          nodes.map((node) => ({
+            text: node.textContent?.trim().slice(0, 30),
+            height: node.getBoundingClientRect().height,
+          })),
+        );
       expect(sizes.length).toBeGreaterThan(8);
       for (const size of sizes) {
-        expect(size.height, `"${size.text}" is ${size.height}px high`).toBeGreaterThanOrEqual(minimum - 0.5);
+        expect(size.height, `"${size.text}" is ${size.height}px high`).toBeGreaterThanOrEqual(
+          minimum - 0.5,
+        );
       }
     });
   });

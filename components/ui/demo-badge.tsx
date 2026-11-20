@@ -14,11 +14,11 @@ export function DemoBadge({ label, detail, className }: DemoBadgeProps) {
       title={detail}
       data-testid="demo-badge"
       className={cn(
-        "inline-flex items-center gap-2 rounded-pill border border-taupe bg-linen px-3 py-0.5 text-sm text-taupe-dark",
+        "rounded-pill border-taupe bg-linen text-taupe-dark inline-flex items-center gap-2 border px-3 py-0.5 text-sm",
         className,
       )}
     >
-      <span aria-hidden="true" className="size-2 rounded-pill bg-warning" />
+      <span aria-hidden="true" className="rounded-pill bg-warning size-2" />
       {label}
       <span className="sr-only">{detail}</span>
     </span>

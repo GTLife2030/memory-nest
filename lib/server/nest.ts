@@ -12,10 +12,17 @@ export type NestView = {
   demo: boolean;
 };
 
-const isUuid = (value: string) => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value);
+const isUuid = (value: string) =>
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value);
 
 // Shown first when a person holds several roles in one family.
-const rolePriority: MembershipRole[] = ["owner", "co_author", "viewer", "legacy_contact", "recipient"];
+const rolePriority: MembershipRole[] = [
+  "owner",
+  "co_author",
+  "viewer",
+  "legacy_contact",
+  "recipient",
+];
 
 /**
  * Loads one nest for the signed-in visitor. Returns null when it does not exist or the visitor is
@@ -40,7 +47,12 @@ export async function getNest(familyId: string): Promise<NestView | null> {
 
   const [family, memberships, profile] = await Promise.all([
     supabase.from("families").select("id, name").eq("id", familyId).maybeSingle(),
-    supabase.from("memberships").select("role").eq("family_id", familyId).eq("user_id", auth.user.id).eq("status", "active"),
+    supabase
+      .from("memberships")
+      .select("role")
+      .eq("family_id", familyId)
+      .eq("user_id", auth.user.id)
+      .eq("status", "active"),
     supabase.from("profiles").select("display_name").eq("user_id", auth.user.id).maybeSingle(),
   ]);
   const roles = (memberships.data ?? []).map((row) => row.role);
@@ -73,7 +85,10 @@ export async function resolveHomeNest(defaultName: string): Promise<string | nul
   const first = memberships?.[0];
   if (first) return first.family_id;
 
-  const { data: familyId, error: createError } = await supabase.rpc("create_family", { p_name: defaultName });
-  if (createError || !familyId) throw new Error(`Could not create the first nest: ${createError?.message}`);
+  const { data: familyId, error: createError } = await supabase.rpc("create_family", {
+    p_name: defaultName,
+  });
+  if (createError || !familyId)
+    throw new Error(`Could not create the first nest: ${createError?.message}`);
   return familyId;
 }
